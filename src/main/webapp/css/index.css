@@ -1,0 +1,190 @@
+@charset "UTF-8";
+/* font : font-family: 'Montserrat', sans-serif;*/
+img {
+    width: 100%;
+    height: 100%;
+}
+.figure-img img {
+    width: 80px;
+    height: 60px;
+    margin: 20px;
+    padding: 10px;
+}
+
+.iconify {
+    color: black;
+}
+
+.title {
+    text-align: center;
+}
+
+.btn-dark:hover{
+    background-color: rgb(83, 83, 83);
+}
+.nav-item{
+    padding: 12px;
+}
+.error {
+    color: red;
+    font-style: italic;
+}
+
+.text-brand {
+    font-family:'Trebuchet MS';
+    font-weight: bold;
+    text-align: center;
+}
+#text-brand{
+    font-size: 42px;
+}
+
+.d-block{
+    height: 700px;
+}
+.icon {
+    width: 300px;
+    height: 70px;
+
+}
+.carousel-caption h2, h4, h5 {
+    font-family: Bodoni MT, sans-serif;
+    color: white;
+    text-shadow: 27px 23px 27px #000000;
+    text-decoration: black;
+    outline-color: black;
+}
+h4 {
+    font-size: 60px;
+}
+.categ {
+    padding-top: 10%;
+}
+.categ h2 {
+    text-align: center;
+}
+
+.colonne {
+	margin: 95px 45px 0 25px;
+	padding:0;
+}
+.colonne:last-child {
+	padding-bottom: 60px;
+}
+.colonne::after {
+	content: '';
+	clear: both;
+	display: block;
+}
+.colonne div {
+	position: relative;
+	float: left;
+	
+}
+.colonne div:first-child {
+	margin-left: 0;
+}
+.categ div {
+	
+	background: rgb(252, 246, 246);
+	overflow: hidden;
+}
+.btn-main {
+    background-color: rgb(24, 23, 23);
+    color: white;
+}
+
+.zoom div img {
+    width: 200px; /* largeur de l'image */
+    height: auto; /* hauteur de l'image */
+    -webkit-transition: .3s ease-in-out !important; 
+    transition: .5s ease-in-out !important; 
+  }
+  .zoom div:hover img:hover {
+    width: 150px; /* on affiche l'image au carré */
+    height: 150px;
+    border-radius: 50%; 
+  }
+
+  h1 ,h2, h3 {
+    font-family: TH SarabunPSK;
+    padding-top: 70px;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 12px;
+  }
+  h5 {
+    font-family: TH SarabunPSK;
+  }
+  .logo, a {
+      text-decoration: none;
+      color: black;
+  }
+
+.col-md-12 ul li{
+    display: inline-block;
+    
+}
+.col-md-12 {
+    padding-bottom: 150px;
+    padding-top: 15px;
+    align-items: center;
+}
+hr {
+    align-self:center;
+    background: black;
+    width: 40%; 
+    height: 1px
+}
+.footer {
+    background-color: lightgray;
+    padding-top: 49px;
+}
+
+
+.sepia figure img {
+	-webkit-filter: sepia(100%);
+	filter: sepia(100%);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+.sepia figure:hover img {
+	-webkit-filter: sepia(0);
+	filter: sepia(0);
+}
+.navbar-brand, .logo {
+    font-family: Bodoni MT;
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.form-group, .sub-btn {
+    padding-top: 10px;
+    margin: 19px;
+}
+
+.block {
+    border: 0.001rem solid lightgray ;
+}
+.block-border{
+    margin: 103px;
+    width: 65%;
+    padding-left: 200px;
+
+}
+.input-group {
+    
+    padding-top: 20px;
+    padding-left: 350px;
+    align-items: center;
+    width: 150%;
+}
+@media screen and (max-width: 1280px)
+{
+    .block-border{
+        margin: 103px;
+        width: 79%;
+        padding-left: 90px;
+    
+    }
+}
