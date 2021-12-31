@@ -11,7 +11,7 @@ public class Translation {
         setLanguage(language);
     }
     public Translation (){
-        super();
+
     }
 
     public String getLabel() {

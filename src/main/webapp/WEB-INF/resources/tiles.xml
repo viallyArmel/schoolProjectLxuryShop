@@ -19,7 +19,6 @@
     <!-- "tiles:" renders the specified page within the template-main -->
 
     <definition name="temp:**" extends="template-main">
-
         <put-attribute name="main-content" value="/WEB-INF/jsp/{1}.jsp" />
     </definition>
 

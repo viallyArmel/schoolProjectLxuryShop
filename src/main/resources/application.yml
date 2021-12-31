@@ -2,3 +2,8 @@ server:
   port: 8082
   servlet:
     context-path: /luxuryShop
+spring:
+  datasource:
+    password: Vially418.
+    url: jdbc:mysql://localhost:3306/luxurydb?user=root
+    driver-class-name: com.mysql.cj.jdbc.Driver

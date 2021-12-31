@@ -1,52 +1,83 @@
 package com.example.henallux.luxuryshopProject.model;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import java.util.ArrayList;
-import java.util.Date;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-public class Customer {
-    private Long id;
+import javax.validation.constraints.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+
+public class Customer implements UserDetails {
 
     @NotBlank
+    @Pattern(regexp = "(?i)(^[a-z])((?![ .,'-]$)[a-z .,'-]){1,29}$")
+    private String firstname;
+    @NotBlank
+    @Pattern(regexp = "(?i)(^[a-z])((?![ .,'-]$)[a-z .,'-]){1,29}$")
+    private String lastname;
+    @NotBlank
+    @Pattern(regexp = "^(?=[a-zA-Z0-9._]{4,20}$)(?!.*[_.]{2})[^_.].*[^_.]$")
     private String username;
     @NotBlank
+    @Pattern(regexp = "^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\\d]){1,})(?=(.*[\\W]){1,})(?!.*\\s).{6,}$")
     private String password;
-    @NotBlank
-    private String firstName, lastName;
+
     @NotBlank
     @Email
     private String email;
+
+    @Pattern(regexp = "^[0-9]{0,10}$")
     private String phoneNumber;
+    @DateTimeFormat(pattern = "dd-mm-yyyy")
     private Date birthdate;
-    private Character gender;
-    private String street, locality, country;
+    private DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
+    private String date;
+    @NotEmpty
+    private String gender;
+
+    private String street;
+    private String locality;
+    @NotEmpty
+    private String country;
+    @NumberFormat(style = NumberFormat.Style.NUMBER)
+    @Min(0)
     private Integer postalCode;
-    private ArrayList<Coupon> coupons;
     private ArrayList<Order> orders;
 
+    private String authorities;
+    private Boolean accountNonExpired;
+    private Boolean accountNonLocked;
+    private Boolean credentialsNonExpired;
+    private Boolean enabled;
 
-    public Customer(String username, String password, String firstName, String lastName, String email,
-                    String phoneNumber, Date birthdate, Character gender, String street, String locality, Integer postalCode, String country) {
-        setUsername(username);
-        setPassword(password);
-        setFirstName(firstName);
-        setLastName(lastName);
-        setEmail(email);
-        setPhoneNumber(phoneNumber);
-        setBirthdate(birthdate);
-        setGender(gender);
-        setStreet(street);
-        setLocality(locality);
-        setPostalCode(postalCode);
-        setCountry(country);
-        coupons = new ArrayList<Coupon>();
-        coupons.add(new Coupon("Coupon de bienvenue", 1., this));
-        orders = new ArrayList<Order>();
-    }
 
     public Customer() {
-        super();
+        setEnabled(true);
+        setCredentialsNonExpired(true);
+        setAccountNonLocked(true);
+        setAccountNonExpired(true);
+        orders = new ArrayList<>();
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+        try {
+            birthdate = new SimpleDateFormat("yyyy-mm-dd").parse(this.date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     public Integer getPostalCode() {
@@ -65,28 +96,12 @@ public class Customer {
         this.orders = orders;
     }
 
-    public ArrayList<Coupon> getCoupons() {
-        return coupons;
-    }
-
-    public void setCoupons(ArrayList<Coupon> coupons) {
-        this.coupons = coupons;
-    }
-
     public void setOrder(Order order) {
         orders.add(order);
     }
 
     public Order getOrder(int i){
         return orders.get(i);
-    }
-
-    public void setCoupon(Coupon coupon){
-        coupons.add(coupon);
-    }
-
-    public Coupon getCoupon(int i) {
-        return coupons.get(i);
     }
 
     public String getUsername() {
@@ -105,20 +120,20 @@ public class Customer {
         this.password = password;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getEmail() {
@@ -142,14 +157,15 @@ public class Customer {
     }
 
     public void setBirthdate(Date birthdate) {
+    //ici je transforme une date en string
         this.birthdate = birthdate;
     }
 
-    public Character getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(Character gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
@@ -176,4 +192,67 @@ public class Customer {
     public void setCountry(String country) {
         this.country = country;
     }
+
+    @Override
+    public Collection<GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+
+        if (authorities != null && !authorities.isEmpty()){
+            String[] authoritiesAsArray = authorities.split(",");
+
+            for (String authority : authoritiesAsArray){
+                if (authority != null && !authority.isEmpty())
+                    grantedAuthorities.add(new SimpleGrantedAuthority(authority));
+            }
+        }
+        return grantedAuthorities;
+    }
+
+    public void setAuthorities(String authorities) {
+        this.authorities = authorities;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return accountNonExpired;
+    }
+
+    public void setAccountNonExpired(Boolean accountNonExpired) {
+        this.accountNonExpired = accountNonExpired;
+    }
+    @Override
+    public boolean isAccountNonLocked() {
+        return accountNonLocked;
+    }
+
+    public void setAccountNonLocked(Boolean accountNonLocked) {
+        this.accountNonLocked = accountNonLocked;
+    }
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return credentialsNonExpired;
+    }
+
+    public void setCredentialsNonExpired(Boolean credentialsNonExpired) {
+        this.credentialsNonExpired = credentialsNonExpired;
+    }
+    @Override
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public String toString(){
+
+        return "Nom : "+ lastname +"\n"+
+                "prenom : "+ firstname +"\n"+
+                "Birthdate : "+ date +"\n"+
+                "password : "+ password +"\n"+
+                "username : "+ username +"\n";
+
+    }
+
 }

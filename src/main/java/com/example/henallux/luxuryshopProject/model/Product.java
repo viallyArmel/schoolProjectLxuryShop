@@ -3,18 +3,31 @@ package com.example.henallux.luxuryshopProject.model;
 import java.util.ArrayList;
 
 public class Product {
-    private Long id;
-    private String name, description;
+    private String name;
+    private String description;
     private Double price;
     private String picture;
+    private Boolean outOfStock;
+    private Category category;
     private ArrayList<OrderLine> orderLines;
 
-    public Product (String name, String description, Double price, String picture){
-        setName(name);
-        setPicture(picture);
-        setPrice(price);
-        setDescription(description);
-        orderLines = new ArrayList<OrderLine>();
+    public Product (){
+        orderLines = new ArrayList<>();
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Boolean getOutOfStock() {
+        return outOfStock;
+    }
+
+    public void setOutOfStock(Boolean inStock) {
+        this.outOfStock = inStock;
     }
 
     public String getDescription() {
@@ -23,10 +36,6 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Product (){
-        super();
     }
 
     public String getName() {

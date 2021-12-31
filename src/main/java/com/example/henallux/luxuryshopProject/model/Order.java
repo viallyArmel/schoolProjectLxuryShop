@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Order {
-    private Long id;
     private Date date;
     private Customer customer;
     private ArrayList<OrderLine> orderLines;
@@ -14,6 +13,7 @@ public class Order {
         setCustomer(customer);
         orderLines = new ArrayList<OrderLine>();
     }
+    public Order (){}
 
     public void setOrderLine(OrderLine orderLine){
         orderLines.add(orderLine);
