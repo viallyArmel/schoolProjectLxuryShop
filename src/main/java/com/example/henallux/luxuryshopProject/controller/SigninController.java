@@ -26,6 +26,7 @@ public class SigninController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String signin(Model model){
+        model.addAttribute("samePassword", true);
         model.addAttribute("user", new Customer());
         model.addAttribute("countries", Utils.countries);
         return "ajax:signin";
@@ -35,14 +36,17 @@ public class SigninController {
     public String getInscription (Model model, @Valid @ModelAttribute(value = "user") Customer customer,
                                   final BindingResult errors){
 
-        if (!errors.hasErrors() && !customerDataAccess.countByUsernameAndEmail(customer.getUsername(), customer.getEmail())) {
+        if (!errors.hasErrors() && !customerDataAccess.countByUsernameAndEmail(customer.getUsername(), customer.getEmail()) && (customer.getPasswordAgain() == customer.getPassword())) {
            customerDataAccess.save(customer);
-           return "redirect:/registered";
+           return "redirect:/login";
         }
         if (customerDataAccess.countByUsernameAndEmail(customer.getUsername(), customer.getEmail())){
-            System.out.println("User exists deja");
             model.addAttribute("customerExists", true);
         }
+        if (!customer.getPasswordAgain().equals(customer.getPassword()))
+            model.addAttribute("samePassword", false);
+        else
+            model.addAttribute("samePassword", true);
 
         model.addAttribute("countries", Utils.countries);
         return "ajax:signin";

@@ -40,35 +40,44 @@
                                 <div class="form-group">
                                     <c:set var="firstnameLabel"><spring:message code="firstnameLabel"/></c:set>
                                     <form:input type="text" class="form-control"  placeholder="${firstnameLabel} *" path="firstname"/>
-                                    <p><form:errors path="firstname" class="err"/></p>
+                                    <p><form:errors path="firstname" class="err"><spring:message code="nameError"/></form:errors></p>
                                 </div>
                                 <div class="form-group">
                                     <c:set var="lastnameLabel"><spring:message code="lastnameLabel"/></c:set>
                                     <form:input type="text" class="form-control"  placeholder="${lastnameLabel} *" path="lastname" />
-                                    <p><form:errors path="lastname" class="err"/></p>
+                                    <p><form:errors path="lastname" class="err"><spring:message code="nameError"/></form:errors></p>
                                 </div>
                                 <div class="form-group">
                                     <c:set var="usernameLabel"><spring:message code="usernameLabel"/></c:set>
                                     <form:input type="text" class="form-control"  placeholder="${usernameLabel} *" path="username" />
-                                    <p><form:errors path="username" class="err"/></p>
+                                    <p><form:errors path="username" class="err"><spring:message code="usernameError"/></form:errors></p>
                                 </div>
                                 <div class="form-group">
                                     <form:input type="email" class="form-control"  placeholder="Email *" path="email" />
-                                    <p><form:errors path="email" class="err"/></p>
+                                    <p><form:errors path="email" class="err"><spring:message code="emailError"/></form:errors></p>
                                 </div>
                                 <div class="form-group">
                                     <c:set var="passwordLabel"><spring:message code="passwordLabel"/></c:set>
                                     <form:input type="password" class="form-control"  placeholder="${passwordLabel} *" path="password" />
-                                    <p><form:errors path="password" class="err"/></p>
+                                    <p><form:errors path="password" class="err"><spring:message code="passwordError"/></form:errors></p>
+                                </div>
+                                <div class="form-group">
+                                    <c:set var="passwordAgain"><spring:message code="passwordLabelAgainLabel"/></c:set>
+                                    <form:input type="password" class="form-control"  placeholder="${passwordAgain} *" path="passwordAgain" />
+                                    <p>
+                                        <c:if test="${samePassword == false}" >
+                                            <spring:message code="passwordAgainError"/>
+                                        </c:if>
+                                    </p>
                                 </div>
                                 <div class="form-group">
                                     <c:set var="phoneLabel"><spring:message code="phoneNumberLabel"/></c:set>
                                     <form:input type="text" class="form-control"  placeholder="${phoneLabel}" path="phoneNumber" />
-                                    <p><form:errors path="phoneNumber" class="err"/></p>
+                                    <p><form:errors path="phoneNumber" class="err"><spring:message code="phoneNumberError"/></form:errors></p>
                                 </div>
                                 <div class="form-group">
                                     <form:input type="date" class="form-control" value="23-10-1998" min="01-01-1400" max="01-01-2014"  path="date" pattern="\d{2}-\d{2}-\d{4}" />
-                                    <p><form:errors path="date" class="err"/></p>
+                                    <p><form:errors path="date" class="err"><spring:message code="dateFormatError"/></form:errors></p>
                                 </div>
                                 <div class="form-group">
                                     <form:select class="form-control"  path="gender" >
@@ -83,7 +92,7 @@
                                 <div class="form-group">
                                     <c:set var="pcLabel"><spring:message code="postalCodeLabel"/></c:set>
                                     <form:input type="text" class="form-control"  placeholder="${pcLabel}" path="postalCode" />
-                                    <p><form:errors path="postalCode" class="err"/></p>
+                                    <p><form:errors path="postalCode" class="err"><spring:message code="postalCodeError"/></form:errors></p>
                                 </div>
                                 <div class="form-group">
                                     <c:set var="localityLabel"><spring:message code="localityLabel"/></c:set>

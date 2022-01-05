@@ -19,8 +19,8 @@
                         <div class="content">
                             <h1 class="page-name">${pageName}</h1>
                             <ol class="breadcrumb">
-                                <li><a href="<spring:url value="/home"/>">Home | </a></li>
-                                <li class="active">${pageName}</li>
+                                <li class="breadcrumb-item"><a href="<spring:url value="/home"/>">Home  </a></li>
+                                <li class="breadcrumb-item active">${pageName}</li>
                             </ol>
                         </div>
                     </div>
@@ -31,14 +31,6 @@
             <div class="container">
                 <c:set var="extension" value=".jpeg"/>
                 <c:set var="devise" value="€"/>
-                <div class="toast align-items-center"  role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="d-flex">
-                        <div class="toast-body">
-                            Hello, world! This is a toast message.
-                        </div>
-                        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-                    </div>
-                </div>
 
                 <div class="row row-cols-3">
                     <c:forEach items="${products}" var="prod" varStatus="status">
@@ -55,10 +47,19 @@
                                 <div class="preview-meta">
                                     <ul>
                                         <li>
-                                            <a href="<spring:url value="#!"/>" ><i class="tf-ion-ios-heart"></i></a>
-                                        </li>
-                                        <li>
-                                            <a onclick="${toat.show()}" href="<spring:url value="#!"/>"><i class="tf-ion-android-cart"></i></a>
+                                            <%--@elvariable id="cartItem" type="java"--%>
+                                            <form:form method="post" id="addToCart"
+                                                action="/luxuryShop/products/addToCart"
+                                                modelAttribute="cartItem">
+                                                <form:input path="categId" type="hidden" value="${categId}"/>
+                                                <form:input path="productId" type="hidden" value="${prod.id}"/>
+                                                <form:input path="label" type="hidden" value="${prod.name}"/>
+                                                <form:input path="image" type="hidden" value="${prod.picture}${extension}"/>
+                                                <form:input path="price" type="hidden" value="${prod.price}"/>
+                                                <form:input path="quantity" value="${cart.value.quantity + 1}" type="hidden"/>
+                                                <form:button class="btnPanier"><i class="tf-ion-android-cart toi"></i></form:button>
+                                                <%--<a href="<spring:url value="#!"/>"><i class="tf-ion-android-cart"></i></a>--%>
+                                            </form:form>
                                         </li>
                                     </ul>
                                 </div>

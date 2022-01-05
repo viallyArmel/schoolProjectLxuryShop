@@ -26,17 +26,23 @@ public class Customer implements UserDetails {
     @NotBlank
     @Pattern(regexp = "^(?=[a-zA-Z0-9._]{4,20}$)(?!.*[_.]{2})[^_.].*[^_.]$")
     private String username;
+
     @NotBlank
     @Pattern(regexp = "^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\\d]){1,})(?=(.*[\\W]){1,})(?!.*\\s).{6,}$")
     private String password;
 
     @NotBlank
+    @Pattern(regexp = "^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\\d]){1,})(?=(.*[\\W]){1,})(?!.*\\s).{6,}$")
+    private String passwordAgain;
+
+    @NotBlank
     @Email
     private String email;
 
+    @NotEmpty
     @Pattern(regexp = "^[0-9]{0,10}$")
     private String phoneNumber;
-    @DateTimeFormat(pattern = "dd-mm-yyyy")
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date birthdate;
     private DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
     private String date;
@@ -73,10 +79,12 @@ public class Customer implements UserDetails {
 
     public void setDate(String date) {
         this.date = date;
-        try {
-            birthdate = new SimpleDateFormat("yyyy-mm-dd").parse(this.date);
-        } catch (ParseException e) {
-            e.printStackTrace();
+        if (birthdate != null){
+            try {
+                birthdate = new SimpleDateFormat("yyyy-mm-dd").parse(this.date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -157,8 +165,15 @@ public class Customer implements UserDetails {
     }
 
     public void setBirthdate(Date birthdate) {
-    //ici je transforme une date en string
         this.birthdate = birthdate;
+    }
+
+    public String getPasswordAgain() {
+        return passwordAgain;
+    }
+
+    public void setPasswordAgain(String passwordAgain) {
+        this.passwordAgain = passwordAgain;
     }
 
     public String getGender() {
@@ -243,16 +258,6 @@ public class Customer implements UserDetails {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
-    }
-
-    public String toString(){
-
-        return "Nom : "+ lastname +"\n"+
-                "prenom : "+ firstname +"\n"+
-                "Birthdate : "+ date +"\n"+
-                "password : "+ password +"\n"+
-                "username : "+ username +"\n";
-
     }
 
 }

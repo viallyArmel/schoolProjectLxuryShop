@@ -70,17 +70,23 @@
                                     <li class="dropdown cart-nav dropdown-slide">
                                         <a class="nav-link active"  href="<spring:url value="/cart"/>">
                                             <span class="iconify" data-icon="ion:cart-outline"></span>
-                                            Card <span class="badge bg-secondary">3</span>
+                                            <spring:message code="cartLabel"/>
+                                            <c:if test="${currentCart.items.size() > 0}">
+                                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                                    ${currentCart.items.size()}
+                                                    <span class="visually-hidden">unread messages</span>
+                                                </span>
 
+                                            </c:if>
                                         </a>
                                     </li>
                                 </ul>
                             </li>
                             <li class="nav-item">
-                                <a href="${LocaleFr}">fr</a>
+                                <a href="${LocaleFr}"><img src="<spring:url value="/images/france.png"/>" alt="drapeau france"/></a>
                             </li>
                             <li class="nav-item">
-                                <a href="${LocaleEn}">en</a>
+                                <a href="${LocaleEn}"><img src="<spring:url value="/images/england.png"/>" alt="drapeau angleterre"/></a>
                             </li>
                         </ul>
                     </span>
@@ -104,17 +110,17 @@
                     <div class="col-md-12">
                         <ul class="social-media">
                             <li>
-                                <a href="<spring:url value="https://www.facebook.com/themefisher"/>">
+                                <a href="<spring:url value="https://www.facebook.com/armel.vially"/>">
                                     <i class="tf-ion-social-facebook"></i>
                                 </a>
                             </li>
                             <li>
-                                <a href="<spring:url value="https://www.instagram.com/themefisher"/>">
+                                <a href="<spring:url value="https://www.instagram.com/vially.dag_model"/>">
                                     <i class="tf-ion-social-instagram"></i>
                                 </a>
                             </li>
                             <li>
-                                <a href="<spring:url value="https://www.twitter.com/themefisher"/>">
+                                <a href="<spring:url value="https://www.twitter.com/DagVially"/>">
                                     <i class="tf-ion-social-twitter"></i>
                                 </a>
                             </li>
@@ -129,13 +135,13 @@
                                 <a href="<spring:url value="contact.html"/>">CONTACT</a>
                             </li>
                             <li>
-                                <a href="<spring:url value="/products/all"/>">SHOP</a>
+                                <a href="<spring:url value="/products/all"/>"><spring:message code="shopLabel"/></a>
                             </li>
                             <li>
-                                <a href="<spring:url value="pricing.html"/>">ABOUT</a>
+                                <a href="<spring:url value="pricing.html"/>"><spring:message code="aboutLabel"/></a>
                             </li>
                             <li>
-                                <a href="<spring:url value="contact.html"/>">PRIVACY POLICY</a>
+                                <a href="<spring:url value="contact.html"/>"><spring:message code="policyLabel"/></a>
                             </li>
                         </ul>
                         <p class="copyright-text">Copyright &copy;2021, Designed &amp; Developed by <a href="<spring:url value="https://github.com/viallyArmel/schoolProjectLxuryShop"/>">Vially & Pierre-olivier</a></p>

@@ -1,6 +1,7 @@
 package com.example.henallux.luxuryshopProject.model;
 
 public class Translation {
+    private Integer id;
     private String label;
     private Category category;
     private Language language;
@@ -11,7 +12,14 @@ public class Translation {
         setLanguage(language);
     }
     public Translation (){
+    }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getLabel() {

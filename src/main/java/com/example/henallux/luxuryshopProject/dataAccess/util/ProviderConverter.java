@@ -1,11 +1,7 @@
 package com.example.henallux.luxuryshopProject.dataAccess.util;
 
-import com.example.henallux.luxuryshopProject.dataAccess.entity.CategoryEntity;
-import com.example.henallux.luxuryshopProject.dataAccess.entity.CustomerEntity;
-import com.example.henallux.luxuryshopProject.dataAccess.entity.ProductEntity;
-import com.example.henallux.luxuryshopProject.model.Category;
-import com.example.henallux.luxuryshopProject.model.Customer;
-import com.example.henallux.luxuryshopProject.model.Product;
+import com.example.henallux.luxuryshopProject.dataAccess.entity.*;
+import com.example.henallux.luxuryshopProject.model.*;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -55,5 +51,25 @@ public class ProviderConverter {
 
     public Category categoryEntityToCategory(CategoryEntity categoryEntity){
         return mapper.map(categoryEntity, Category.class);
+    }
+
+    public OrderLine OrderLineEntityToOrderLine(OrderLineEntity orderLineEntity){
+        return mapper.map(orderLineEntity, OrderLine.class);
+    }
+    public OrderLineEntity orderLineToOrderLineEntity(OrderLine orderLine){
+        return mapper.map(orderLine, OrderLineEntity.class);
+    }
+
+    public Order orderEntityToOrder(OrderEntity orderEntity){
+        return mapper.map(orderEntity, Order.class);
+    }
+    public OrderEntity orderToOrderEntity(Order order){
+        return mapper.map(order, OrderEntity.class);
+    }
+    public Translation tanslationEntityToTranslation(TranslationEntity translationEntity){
+        return mapper.map(translationEntity, Translation.class);
+    }
+    public TranslationEntity translationToTranslationEntity(Translation translation){
+        return mapper.map(translation, TranslationEntity.class);
     }
 }
