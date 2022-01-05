@@ -39,20 +39,22 @@
                             <a class="logo" href="<spring:url value="/home"/> ">
                                 LUXURY
                             </a>
-                            <h2 class="text-center">Welcome Back</h2>
+                            <h2 class="text-center"><spring:message code="welcomeBackLabel"/></h2>
                             <%--@elvariable id="customer" type="java"--%>
                             <form:form class="text-left clearfix" modelAttribute="customer" method="post" >
                                 <div class="form-group">
-                                    <form:input type="text" class="form-control"  placeholder="Username" path="username"/>
+                                    <c:set var="username"><spring:message code="usernameLabel"/></c:set>
+                                    <form:input type="text" class="form-control"  placeholder="${username}" path="username"/>
                                 </div>
                                 <div class="form-group">
-                                    <form:input type="password" class="form-control" placeholder="Password" path="password"/>
+                                    <c:set var="password"><spring:message code="passwordLabel"/></c:set>
+                                    <form:input type="password" class="form-control" placeholder="${password}" path="password"/>
                                 </div>
                                 <div class="text-center">
-                                    <form:button type="submit" class="btn btn-main text-center" >Login</form:button>
+                                    <form:button type="submit" class="btn btn-main text-center" ><spring:message code="loginButton"/></form:button>
                                 </div>
                             </form:form>
-                            <p class="mt-20">New in this site ?<a href="<spring:url value="/sign" />"> Create New Account</a></p>
+                            <p class="mt-20"><spring:message code="newIntheSiteLabel"/><a href="<spring:url value="/sign" />"> <spring:message code="newAccountLabel"/></a></p>
                         </div>
                     </div>
                 </div>

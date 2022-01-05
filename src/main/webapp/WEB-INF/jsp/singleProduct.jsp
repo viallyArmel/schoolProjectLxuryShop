@@ -19,9 +19,9 @@
                 <div class="row">
                     <div class="col-md-6">
                         <ol class="breadcrumb">
-                            <li><a href="<spring:url value="/home"/>"><spring:message code="homeLabel"/></a> / </li>
-                            <li> <a href="<spring:url value="/products/category/${product.category.id}"/>">${categoryName}</a> /</li>
-                            <li class="active"> ${product.name}</li>
+                            <li class="breadcrumb-item"><a href="<spring:url value="/home"/>"><spring:message code="homeLabel"/></a> </li>
+                            <li class="breadcrumb-item"> <a href="<spring:url value="/products/category/${product.category.id}"/>">${categoryName}</a></li>
+                            <li class="breadcrumb-item active"> ${product.name}</li>
                         </ol>
                     </div>
                 </div>
@@ -42,21 +42,33 @@
                     </div>
                     <div class="col-md-7">
                         <div class="single-product-details">
-                            <h2>${product.name}</h2>
-                            <p class="product-price">${product.price} ${devise}</p>
-                            <div class="product-quantity">
-                                <span><spring:message code="quantityLabel"/>:</span>
-                                <div class="product-quantity-slider">
-                                    <input id="product-quantity" type="number"  min="0" max="3000" value="0" name=<spring:message code="productQuantityLabel"/>>
+                            <%--@elvariable id="cartItem" type="java"--%>
+                            <form:form method="post" id="addToCart"
+                                       action="/luxuryShop/products/addToCart"
+                                       modelAttribute="cartItem">
+
+                                <h2>${product.name}</h2>
+                                <p class="product-price">${product.price} ${devise}</p>
+                                <div class="product-quantity">
+                                    <span><spring:message code="quantityLabel"/>:</span>
+                                    <div class="product-quantity-slider">
+                                        <form:input path="quantity" type="number"  min="1" max="100" value="1"/>
+                                        <form:errors path="quantity" class="err" />
+                                        <form:input path="categId" type="hidden" value="${categId}"/>
+                                        <form:input path="productId" type="hidden" value="${product.id}"/>
+                                        <form:input path="label" type="hidden" value="${product.name}"/>
+                                        <form:input path="image" type="hidden" value="${product.picture}${extension}"/>
+                                        <form:input path="price" type="hidden" value="${product.price}"/>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="product-category">
-                                <span>Categories:</span>
-                                <ul>
-                                    <li><a href="<spring:url value="/products/category/${product.category.id}"/>">${categoryName}</a></li>
-                                </ul>
-                            </div>
-                            <a href="cart.html" class="btn btn-main mt-20"><spring:message code="addToCart" /></a>
+                                <div class="product-category">
+                                    <span><spring:message code="categoryLabel"/>:</span>
+                                    <ul>
+                                        <li class="nameCateg"><a href="<spring:url value="/products/category/${product.category.id}"/>">${categoryName}</a></li>
+                                    </ul>
+                                </div>
+                                <form:button class="btn btn-main mt-20"><spring:message code="addToCart" /></form:button>
+                            </form:form>
                         </div>
                     </div>
                 </div>

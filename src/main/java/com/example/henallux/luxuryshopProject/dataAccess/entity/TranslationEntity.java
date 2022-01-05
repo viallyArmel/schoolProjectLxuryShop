@@ -11,10 +11,12 @@ public class TranslationEntity {
     private Integer id;
     @Column(name = "label")
     private String label;
-    @JoinColumn(name = "translation_category_fk", referencedColumnName = "id")
+
+    @JoinColumn(name = "category", referencedColumnName = "id")
     @ManyToOne
     private CategoryEntity category;
-    @JoinColumn(name = "translation_language_fk", referencedColumnName = "code")
+
+    @JoinColumn(name = "language", referencedColumnName = "code")
     @ManyToOne
     private LanguageEntity language;
 

@@ -17,10 +17,10 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="content">
-                            <h1 class="page-name">Cart</h1>
+                            <h1 class="page-name"><spring:message code="cartLabel"/></h1>
                             <ol class="breadcrumb">
-                                <li><a href="/luxuryShop/home">Home  </a></li>
-                                <li class="active"> | cart</li>
+                                <li class="breadcrumb-item"><a href="/luxuryShop/home"><spring:message code="homeLabel"/>  </a></li>
+                                <li class="breadcrumb-item active"><spring:message code="cartLabel"/></li>
                             </ol>
                         </div>
                     </div>
@@ -28,92 +28,121 @@
             </div>
         </section>
 
-        <div class="page-wrapper">
-            <div class="cart shopping test">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-2">
-                            <div class="block">
-                                <div class="product-list">
-                                    <form method="post">
+        <c:if test="${currentCart.items.size() > 0}">
+            <div class="page-wrapper">
+                <div class="cart shopping test">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2">
+                                <div class="block withoutBorder">
+                                    <div class="product-list">
                                         <table class="table">
                                             <thead>
                                             <tr>
-                                                <th class="">Name</th>
-                                                <th class="">Price</th>
-                                                <th class="">Quantity</th>
-                                                <th class="">Actions</th>
+                                                <th class="tableCol"><spring:message code="nameLabel"/></th>
+                                                <th class="tableCol"><spring:message code="priceLabel"/></th>
+                                                <th class="tableCol"><spring:message code="quantityLabel"/></th>
+                                                <th class="tableCol">Actions</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr class="">
-                                                <td class="">
-                                                    <div class="product-info">
-                                                        <img width="80" src="<spring:url value="/images/menShoes/menShoes3.jpeg"/>" alt="" />
-                                                        <a href="#!">Sunglass</a>
-                                                    </div>
-                                                </td>
-                                                <td class="">$200.00</td>
-                                                <td>
-                                                    <input class="itemPrice" name="quantity" width="5" type="number" value="1" min="1">
-                                                </td>
-                                                <td class="">
-                                                    <a class="product-remove" href="#!">Remove</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="product-info">
-                                                        <img width="80" src="<spring:url value="/images/menShoes/menShoes3.jpeg"/>" alt="" />
-                                                        <a href="#!">Airspace</a>
-                                                    </div>
-                                                </td>
-                                                <td class="">$200.00</td>
-                                                <td>
-                                                    <input class="itemPrice" name="quantity" width="5" type="number" value="1" min="1">
-                                                </td>
-                                                <td class="">
-                                                    <a class="product-remove" href="#!">Remove</a>
-                                                </td>
-                                            </tr>
-                                            <tr class="">
-                                                <td class="">
-                                                    <div class="product-info">
-                                                        <img width="80" src="<spring:url value="/images/menShoes/menShoes3.jpeg"/>" alt="" />
-                                                        <a href="#!">Bingo</a>
-                                                    </div>
-                                                </td>
-                                                <td class="">$200.00</td>
-                                                <td>
-                                                    <input class="itemPrice" name="quantity" width="5" type="number" value="1" min="1">
-                                                </td>
-                                                <td class="">
-                                                    <a class="product-remove" href="#!">Remove</a>
-                                                </td>
-                                            </tr>
+                                            <c:forEach items="${currentCart.items}" var="cart" varStatus="status">
+                                                <tr class="tableLine">
+                                                    <td class="tableCol">
+                                                        <div class="product-info">
+                                                            <img src="<spring:url value="${cart.value.image}"/>" alt="${cart.value.label}" />
+                                                            <a href="<spring:url value="/products/single/${cart.value.label}/${cart.value.categId}"/>">${cart.value.label}</a>
+                                                        </div>
+                                                    </td>
+                                                    <td class="tableCol">${cart.value.price} €</td>
+                                                    <td class="tableCol"><%--@elvariable id="cartItem" type="java"--%>
+                                                        <div class="row row-cols-3">
+                                                            <div class="col">
+                                                                <form:form method="post" modelAttribute="cartItem" action="/luxuryShop/cart/removeQuantity">
+                                                                    <form:input path="productId" value="${cart.key}" type="hidden"/>
+                                                                    <form:button class="btn btn-outline-secondary"><img src="<spring:url value="/images/remove.png"/> "/></form:button>
+                                                                    <form:input path="quantity" class="itemPrice" type="hidden" value="${cart.value.quantity}" min="0"/>
+                                                                </form:form>
+                                                            </div>
+                                                            <div class="col">
+                                                                <input class="itemPrice" type="number" disabled value="${cart.value.quantity}"/>
+                                                            </div>
+                                                            <div class="col">
+                                                                <form:form method="post" modelAttribute="cartItem" action="/luxuryShop/cart/addQuantity">
+                                                                    <form:input path="productId" value="${cart.key}" type="hidden"/>
+                                                                    <form:input path="quantity" class="itemPrice" type="hidden" value="${cart.value.quantity}" min="0"/>
+                                                                    <form:button class="btn btn-outline-secondary"><img src="<spring:url value="/images/add.png"/> "/></form:button>
+                                                                </form:form>
+                                                            </div>
+                                                        </div>
+
+
+
+                                                    </td>
+                                                    <td class="tableCol">
+                                                        <form:form method="post" action="/luxuryShop/cart/remove" modelAttribute="cartItem">
+                                                            <form:input path="productId" value="${cart.key}" type="hidden"/>
+                                                            <form:button class="btn btn-outline-secondary"><img src="<spring:url value="/images/delete.png"/> "/></form:button>
+                                                        </form:form>
+                                                    </td>
+                                                </tr>
+
+                                            </c:forEach>
+
                                             </tbody>
                                         </table>
                                         <div class="row row-cols-2">
                                             <div class="col">
-                                                <a href="checkout.html" class="btn btn-main pull-right">Checkout</a>
+                                                <%--@elvariable id="cartItem" type="java"--%>
+                                                <form:form method="post"
+                                                    action=" https://www.sandbox.paypal.com/cgi-bin/webscr"
+                                                    modelAttribute="cartItem">
+
+                                                    <input type="hidden" name="business" value="armelvially418@yahoo.fr" />
+                                                    <input type="hidden" name="cert_id" value="AWA0RZ0pvDG-w-EYUR4dcBJpMgEnDlolGGYzkMAANmQnHwhNd8X0ruBRJ9Hvat6J-Iz_FsytLuXHW3IQ" />
+                                                    <input type="hidden" name="cmd" value="_cart" />
+                                                    <input type="hidden" name="upload" value="1" />
+
+                                                    <c:forEach items="${ currentCart.items }" var="cart" varStatus="status">
+                                                        <input type="hidden" name="quantity_${status.count}" value="${cart.value.quantity}" />
+                                                        <input type="hidden" name="amount_${status.count}" value="${cart.value.price}" />
+                                                        <input type="hidden" name="item_name_${status.count}" value="${cart.value.label}" />
+                                                    </c:forEach>
+                                                    <input type="hidden" name="return" value="http://localhost:8082/luxuryShop/home" />
+                                                    <input type="hidden" name="cancel_return" value="http://localhost:8082/luxuryShop/home" />
+                                                    <input type="hidden" name="currency_code" value="EUR" />
+                                                    <input type="hidden" name="lc" value="${locale.getLanguage()}-${locale.getCountry()}" />
+
+                                                    <sec:authorize access="isAuthenticated()">
+                                                        <form:button class="btn btn-main pull-right"><spring:message code="buyButton"/></form:button>
+
+                                                    </sec:authorize>
+                                                    <sec:authorize access="!isAuthenticated()">
+                                                    <a href="<spring:url value="/login"/>"><form:button disabled="true" class="btn btn-main pull-right"><spring:message code="buyButton"/></form:button></a>
+                                                    </sec:authorize>
+                                                    <div class="form-check form-switch">
+                                                        <form:checkbox path="saveOrder" class="form-check-input" role="switch" id="flexSwitchCheckDefault"/>
+                                                        <form:label path="saveOrder" class="form-check-label"><spring:message code="saveOrderLabel"/></form:label>
+                                                    </div>
+                                                </form:form>
                                             </div>
                                             <div class="col">
                                                 <label>Total :</label>
-                                                <input type="text" disabled value="300£">
+                                                <input type="text" disabled value="${currentCart.getTotalPrice()} €">
                                             </div>
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
+                                <sec:authorize access="!isAuthenticated()">
+                                    <div class="alert alert-danger" role="alert">
+                                        <spring:message code="connectToBuyLabel"/>
+                                    </div>
+                                </sec:authorize>
                             </div>
-                            <sec:authorize access="!isAuthenticated()">
-                                <div class="alert alert-danger" role="alert">
-                                    Connect to checkout !
-                                </div>
-                            </sec:authorize>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </c:if>
     </body>
 </html>

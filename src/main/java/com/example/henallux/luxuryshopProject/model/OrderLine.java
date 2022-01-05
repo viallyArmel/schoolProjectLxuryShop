@@ -1,6 +1,7 @@
 package com.example.henallux.luxuryshopProject.model;
 
 public class OrderLine {
+    private Integer id;
     private Integer quantity;
     private Double price;
     private Product product;
@@ -11,6 +12,15 @@ public class OrderLine {
         setPrice(price);
         setProduct(product);
         setQuantity(quantity);
+    }
+    public OrderLine (){}
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getQuantity() {

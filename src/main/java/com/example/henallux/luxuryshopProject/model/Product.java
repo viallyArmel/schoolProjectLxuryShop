@@ -3,6 +3,7 @@ package com.example.henallux.luxuryshopProject.model;
 import java.util.ArrayList;
 
 public class Product {
+    private Integer id;
     private String name;
     private String description;
     private Double price;
@@ -60,6 +61,14 @@ public class Product {
 
     public void setPicture(String picture) {
         this.picture = picture;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }
 
