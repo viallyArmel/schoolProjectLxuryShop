@@ -75,16 +75,27 @@ public class Customer implements UserDetails {
         orders = new ArrayList<>();
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public String getDate() {
         return date;
     }
 
     public void setDate(String date) {
         this.date = date;
-        try {
-            birthdate = new SimpleDateFormat("yyyy-MM-dd").parse(this.date);
-        } catch (ParseException e) {
-            e.printStackTrace();
+
+        if (date != null && !date.equals("")){
+            try {
+                birthdate = new SimpleDateFormat("yyyy-MM-dd").parse(this.date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -260,4 +271,12 @@ public class Customer implements UserDetails {
         this.enabled = enabled;
     }
 
+    @Override
+    public String toString(){
+        return username + " \n"+ password + " \n"+
+                firstname + " \n"+ lastname + " \n"+
+                date + " \n"+ gender + " \n"+ country + " \n"+
+                email + " \n"+ street + " \n"+ postalCode + " \n"+ locality
+                + " \n"+ phoneNumber;
+    }
 }
