@@ -17,6 +17,8 @@ import java.util.List;
 
 public class Customer implements UserDetails {
 
+    private Integer id;
+
     @NotBlank
     @Pattern(regexp = "(?i)(^[a-z])((?![ .,'-]$)[a-z .,'-]){1,29}$")
     private String firstname;
