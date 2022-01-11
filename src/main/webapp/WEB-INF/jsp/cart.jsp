@@ -60,6 +60,7 @@
                                                         <span class="canceled">${DecimalFormater.fromDoubleToString(cart.value.price)}€</span>
                                                     </c:if>
                                                     <span>${DecimalFormater.fromDoubleToString(cart.value.price - cart.value.price * cart.value.reduction)}€</span>
+
                                                 </td>
                                                 <td class="tableCol"><%--@elvariable id="cartItem" type="java"--%>
                                                     <div class="row row-cols-3">
