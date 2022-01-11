@@ -37,14 +37,14 @@ public class Customer implements UserDetails {
 
     @NotBlank
     @Email
+    @Pattern(regexp = ".+@.+\\..+")
     private String email;
 
     @NotEmpty
     @Pattern(regexp = "^[0-9]{0,10}$")
     private String phoneNumber;
-    @DateTimeFormat(pattern = "yyyy-mm-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthdate;
-    private DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
     private String date;
     @NotEmpty
     private String gender;
@@ -79,12 +79,10 @@ public class Customer implements UserDetails {
 
     public void setDate(String date) {
         this.date = date;
-        if (birthdate != null){
-            try {
-                birthdate = new SimpleDateFormat("yyyy-mm-dd").parse(this.date);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+        try {
+            birthdate = new SimpleDateFormat("yyyy-MM-dd").parse(this.date);
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
     }
 

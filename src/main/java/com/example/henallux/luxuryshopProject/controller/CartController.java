@@ -3,14 +3,11 @@ package com.example.henallux.luxuryshopProject.controller;
 import com.example.henallux.luxuryshopProject.Constants;
 import com.example.henallux.luxuryshopProject.model.Cart;
 import com.example.henallux.luxuryshopProject.model.CartItem;
-import com.example.henallux.luxuryshopProject.model.CurrPage;
-import com.example.henallux.luxuryshopProject.model.OrderLine;
+import com.example.henallux.luxuryshopProject.service.PurchaseManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Locale;
 
@@ -19,11 +16,23 @@ import java.util.Locale;
 @SessionAttributes({Constants.CURRENT_CART})
 public class CartController {
 
+    private final PurchaseManager purchaseManager;
+
+    @Autowired
+    public CartController(PurchaseManager purchaseManager){
+        this.purchaseManager = purchaseManager;
+    }
+
     @RequestMapping(method = RequestMethod.GET)
     public String getCart(Model model, @ModelAttribute(value = Constants.CURRENT_CART) Cart cart, Locale locale){
         model.addAttribute(Constants.CURRENT_CART, cart);
         model.addAttribute("cartItem", new CartItem());
         model.addAttribute("locale", locale);
+        for(CartItem item : cart.getItems().values()) {
+            purchaseManager.applyCartItemReduction(item);
+        }
+        purchaseManager.applyCartReduction(cart);
+        System.out.println("Cart has reduction : " + cart.hasReduction());
         return "temp:cart";
     }
 

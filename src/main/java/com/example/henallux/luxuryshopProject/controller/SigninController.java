@@ -36,7 +36,9 @@ public class SigninController {
     public String getInscription (Model model, @Valid @ModelAttribute(value = "user") Customer customer,
                                   final BindingResult errors){
 
-        if (!errors.hasErrors() && !customerDataAccess.countByUsernameAndEmail(customer.getUsername(), customer.getEmail()) && (customer.getPasswordAgain() == customer.getPassword())) {
+        if (!errors.hasErrors()
+                && !customerDataAccess.countByUsernameAndEmail(customer.getUsername(), customer.getEmail())
+                && (customer.getPasswordAgain().equals(customer.getPassword()))) {
            customerDataAccess.save(customer);
            return "redirect:/login";
         }

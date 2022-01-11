@@ -5,7 +5,8 @@
   Time: 18:52
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page pageEncoding="UTF-8"
+         contentType="text/html;charset=UTF-8" %>
 <%@ include file="include/importTags.jsp"%>
 <html>
     <head>
@@ -105,7 +106,7 @@
 
                                                     <c:forEach items="${ currentCart.items }" var="cart" varStatus="status">
                                                         <input type="hidden" name="quantity_${status.count}" value="${cart.value.quantity}" />
-                                                        <input type="hidden" name="amount_${status.count}" value="${cart.value.price}" />
+                                                        <input type="hidden" name="amount_${status.count}" value="${cart.value.price - cart.value.price * cart.value.reduction}" />
                                                         <input type="hidden" name="item_name_${status.count}" value="${cart.value.label}" />
                                                     </c:forEach>
                                                     <input type="hidden" name="return" value="http://localhost:8082/luxuryShop/home" />
@@ -128,7 +129,10 @@
                                             </div>
                                             <div class="col">
                                                 <label>Total :</label>
-                                                <input type="text" disabled value="${currentCart.getTotalPrice()} €">
+                                                <c:if test="${currentCart.hasReduction()}">
+                                                    <span class="canceled">${currentCart.getTotalPrice(false)}€</span>
+                                                </c:if>
+                                                <span>${currentCart.getTotalPrice(true)}€</span>
                                             </div>
                                         </div>
                                     </div>

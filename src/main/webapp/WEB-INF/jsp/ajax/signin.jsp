@@ -5,7 +5,8 @@
   Time: 10:04
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page pageEncoding="UTF-8"
+         contentType="text/html;charset=UTF-8" %>
 <%@include file="../include/importTags.jsp"%>
 <html>
     <head>
@@ -119,7 +120,7 @@
                             <p class="mt-20"><spring:message code="AllreadyAccountLabel"/><a href="<spring:url value= "/login" />"> <spring:message code="loginButton" /></a></p>
                             <c:if test="${customerExists}">
                                 <div class="alert alert-danger" role="alert">
-                                    You are already exists ! try to login
+                                    You already exist ! Try to login
                                 </div>
                             </c:if>
                         </div>
