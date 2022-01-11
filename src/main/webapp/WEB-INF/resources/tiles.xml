@@ -22,6 +22,10 @@
         <put-attribute name="main-content" value="/WEB-INF/jsp/{1}.jsp" />
     </definition>
 
+    <definition name="static:**" extends="template-main">
+        <put-attribute name="main-content" value="/WEB-INF/jsp/static/{1}.jsp" />
+    </definition>
+
     <definition name="main-content" extends="template-main">
         <put-attribute name="main-content" value="/WEB-INF/jsp/error.jsp" />
     </definition>

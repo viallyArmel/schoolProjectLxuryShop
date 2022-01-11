@@ -1,8 +1,12 @@
 package com.example.henallux.luxuryshopProject.model;
 
+import javax.validation.constraints.*;
+
 public class OrderLine {
     private Integer id;
+    @Min(value = 1)
     private Integer quantity;
+    @Min(value = 0)
     private Double price;
     private Product product;
     private Order order;

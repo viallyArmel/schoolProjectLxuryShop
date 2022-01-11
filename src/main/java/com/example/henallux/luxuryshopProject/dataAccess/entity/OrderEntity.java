@@ -4,15 +4,16 @@ import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
-@Table(name = "order")
+@Table(name = "`order`")
 public class OrderEntity {
 
     @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "date")
+    @Column(name = "date_order")
     private Date date;
-    @JoinColumn(name = "order_customer_fk", referencedColumnName = "id")
+    @JoinColumn(name = "customer", referencedColumnName = "id")
     @ManyToOne
     private CustomerEntity customer;
 

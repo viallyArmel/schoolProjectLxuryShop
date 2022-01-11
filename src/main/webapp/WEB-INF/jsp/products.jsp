@@ -36,11 +36,6 @@
                     <c:forEach items="${products}" var="prod" varStatus="status">
                         <div class="product-item">
                             <div class="product-thumb">
-                                <c:if test="${prod.outOfStock}">
-                                    <span class="bage">
-                                        <c:out value="Out of stock" escapeXml="false" />
-                                    </span>
-                                </c:if>
                                 <a href="<spring:url value="/products/single/${prod.name}/${prod.category.id}"/> ">
                                     <img class="img-responsive" src="<spring:url value="${prod.picture}${extension}"/>" alt="${prod.name}" />
                                 </a>

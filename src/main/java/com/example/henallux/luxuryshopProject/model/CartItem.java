@@ -10,14 +10,14 @@ public class CartItem {
     private String label;
     private String image;
     private Double price;
+    private Double reduction;
     private Boolean saveOrder;
 
-    @NotNull
-    @Min(value = 1)
     private Integer quantity;
     private Integer categId;
 
     public CartItem (){
+        setReduction(0d);
     }
 
     public void setSaveOrder(boolean saveOrder) {
@@ -65,7 +65,15 @@ public class CartItem {
     }
 
     public void setPrice(Double price) {
-        this.price = price;
+        this.price = Math.max(price, 0);
+    }
+
+    public Double getReduction () {
+        return reduction;
+    }
+
+    public void setReduction (Double reduction) {
+        this.reduction = Math.min(reduction, 1);
     }
 
     public Integer getQuantity() {
@@ -73,11 +81,14 @@ public class CartItem {
     }
 
     public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
+        this.quantity = Math.max(quantity, 0);
     }
 
-    public double totalPrice(){
-        return price * quantity;
+    public double totalPrice(boolean applyReduction){
+        return (price - (applyReduction? price * reduction : 0)) * quantity;
     }
 
+    public double totalPrice() {
+        return totalPrice(true);
+    }
 }

@@ -5,7 +5,7 @@
   Time: 14:06
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="../include/importTags.jsp"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <html>
@@ -138,13 +138,13 @@
                                 <a href="<spring:url value="/products/all"/>"><spring:message code="shopLabel"/></a>
                             </li>
                             <li>
-                                <a href="<spring:url value="pricing.html"/>"><spring:message code="aboutLabel"/></a>
+                                <a href="<spring:url value="/about"/>"><spring:message code="aboutLabel"/></a>
                             </li>
                             <li>
                                 <a href="<spring:url value="contact.html"/>"><spring:message code="policyLabel"/></a>
                             </li>
                         </ul>
-                        <p class="copyright-text">Copyright &copy;2021, Designed &amp; Developed by <a href="<spring:url value="https://github.com/viallyArmel/schoolProjectLxuryShop"/>">Vially & Pierre-olivier</a></p>
+                        <p class="copyright-text">Copyright &copy;2021, Designed &amp; Developed by <a target="_blank" href="<spring:url value="https://github.com/viallyArmel/schoolProjectLxuryShop"/>">Vially & Pierre-olivier</a></p>
                     </div>
                 </div>
             </div>

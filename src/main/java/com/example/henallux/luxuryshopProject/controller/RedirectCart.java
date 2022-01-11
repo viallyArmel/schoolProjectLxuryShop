@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping(value = "/registered")
-public class SuccessSigninController {
+@RequestMapping(value = "/redirectCart")
+public class RedirectCart {
 
     @RequestMapping(method = RequestMethod.GET)
-    public String successInscription(){
-        return "ajax:successSignin";
+    public String redirect(){
+        return "redirect:/cart";
     }
 }

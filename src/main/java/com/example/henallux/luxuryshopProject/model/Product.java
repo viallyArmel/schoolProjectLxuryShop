@@ -1,11 +1,14 @@
 package com.example.henallux.luxuryshopProject.model;
 
+import javax.validation.constraints.*;
+
 import java.util.ArrayList;
 
 public class Product {
     private Integer id;
     private String name;
     private String description;
+    @Min(value = 0)
     private Double price;
     private String picture;
     private Boolean outOfStock;

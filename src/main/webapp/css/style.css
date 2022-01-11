@@ -58,13 +58,38 @@ FACEBOOK: https://www.facebook.com/themefisher
 -------------------------------------------------------------------*/
 /*=== MEDIA QUERY ===*/
 @import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500");
+
+#googleMap {
+  height : 400px;
+  width : 400px;
+}
+
+.noBorder {
+  border: none;
+}
+
+.noBorder td {
+  padding-right : 8px;
+}
+/*
+.noBorder tr :nth-of-type(2) {
+  display : flex;
+  float : left;
+}
+ */
+
+.canceled {
+  text-decoration: line-through;
+  color: darkred;
+}
+
 body {
   line-height: 1.5;
   font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
-p {
+p, ul li, table {
   font-family: "Poppins", sans-serif;
   color: #757575;
   font-size: 15px;

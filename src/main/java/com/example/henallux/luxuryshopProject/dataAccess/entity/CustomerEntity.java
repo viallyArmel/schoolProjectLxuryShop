@@ -48,6 +48,14 @@ public class CustomerEntity {
 
     public CustomerEntity(){}
 
+    /**
+     * For @Test purpose ONLY.
+     * @param email mocked email.
+     */
+    public CustomerEntity(String email) {
+        setEmail(email);
+    }
+
     public Integer getId() {
         return id;
     }

@@ -2,7 +2,6 @@ package com.example.henallux.luxuryshopProject.controller;
 
 import com.example.henallux.luxuryshopProject.dataAccess.dao.CategoryDAO;
 import com.example.henallux.luxuryshopProject.dataAccess.dao.CategoryDataAccess;
-import com.example.henallux.luxuryshopProject.model.Language;
 import com.example.henallux.luxuryshopProject.service.LanguageService;
 import com.example.henallux.luxuryshopProject.service.TranslationService;
 import org.springframework.beans.factory.annotation.Autowired;

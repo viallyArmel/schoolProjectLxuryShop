@@ -14,6 +14,8 @@ public class ProviderConverter {
 
     public Customer customerEntityToCustomer(CustomerEntity customerEntity){
         Customer customer = mapper.map(customerEntity, Customer.class);
+        customer.setFirstname(customerEntity.getFirstName());
+        customer.setLastname(customerEntity.getLastName());
         customer.setAccountNonExpired(customerEntity.getAccountNonExpired());
         customer.setAccountNonLocked(customerEntity.getAccountNonLocked());
         customer.setCredentialsNonExpired(customerEntity.getCredentialsNonExpired());
@@ -64,7 +66,9 @@ public class ProviderConverter {
         return mapper.map(orderEntity, Order.class);
     }
     public OrderEntity orderToOrderEntity(Order order){
-        return mapper.map(order, OrderEntity.class);
+        OrderEntity orderEntity = mapper.map(order, OrderEntity.class);
+        orderEntity.setCustomer(userModelToUserEntity(order.getCustomer()));
+        return orderEntity;
     }
     public Translation tanslationEntityToTranslation(TranslationEntity translationEntity){
         return mapper.map(translationEntity, Translation.class);
