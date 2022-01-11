@@ -3,7 +3,6 @@ package com.example.henallux.luxuryshopProject.dataAccess.dao;
 import com.example.henallux.luxuryshopProject.dataAccess.entity.ProductEntity;
 import com.example.henallux.luxuryshopProject.dataAccess.repository.ProductRepository;
 import com.example.henallux.luxuryshopProject.dataAccess.util.ProviderConverter;
-import com.example.henallux.luxuryshopProject.model.Category;
 import com.example.henallux.luxuryshopProject.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

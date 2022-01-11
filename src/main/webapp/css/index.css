@@ -231,3 +231,26 @@ hr {
     padding-top: 43px;
     color: black;
 }
+
+
+#showpopup{
+    color: white;
+    background-color: black;
+    border: 3px solid darkorange;
+    cursor: pointer;
+    outline: none;
+}
+#popup{
+    border: 1px solid black;
+    width: 300px;
+    height: 200px;
+}
+
+#saveComandImg{
+    width: 140%;
+    height: 32px;
+}
+
+.accordionLabel{
+    width: 180%;
+}

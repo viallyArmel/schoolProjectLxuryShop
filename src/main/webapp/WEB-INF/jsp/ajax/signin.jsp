@@ -77,7 +77,6 @@
                                 </div>
                                 <div class="form-group">
                                     <form:input type="date" class="form-control" value="23-10-1998" min="01-01-1400" max="01-01-2014"  path="date" pattern="\d{2}-\d{2}-\d{4}" />
-                                    <p><form:errors path="date" class="err"><spring:message code="dateFormatError"/></form:errors></p>
                                 </div>
                                 <div class="form-group">
                                     <form:select class="form-control"  path="gender" >

@@ -5,7 +5,7 @@
   Time: 18:52
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="include/importTags.jsp"%>
 <html>
     <head>
@@ -75,9 +75,6 @@
                                                                 </form:form>
                                                             </div>
                                                         </div>
-
-
-
                                                     </td>
                                                     <td class="tableCol">
                                                         <form:form method="post" action="/luxuryShop/cart/remove" modelAttribute="cartItem">
@@ -109,7 +106,7 @@
                                                         <input type="hidden" name="item_name_${status.count}" value="${cart.value.label}" />
                                                     </c:forEach>
                                                     <input type="hidden" name="return" value="http://localhost:8082/luxuryShop/home" />
-                                                    <input type="hidden" name="cancel_return" value="http://localhost:8082/luxuryShop/home" />
+                                                    <input type="hidden" name="cancel_return" value="http://localhost:8082/luxuryShop/cart/paymentFailed" />
                                                     <input type="hidden" name="currency_code" value="EUR" />
                                                     <input type="hidden" name="lc" value="${locale.getLanguage()}-${locale.getCountry()}" />
 
@@ -118,13 +115,41 @@
 
                                                     </sec:authorize>
                                                     <sec:authorize access="!isAuthenticated()">
-                                                    <a href="<spring:url value="/login"/>"><form:button disabled="true" class="btn btn-main pull-right"><spring:message code="buyButton"/></form:button></a>
+                                                    <a href="<spring:url value="/redirectCart"/>"><form:button disabled="true" class="btn btn-main pull-right"><spring:message code="buyButton"/></form:button></a>
                                                     </sec:authorize>
-                                                    <div class="form-check form-switch">
-                                                        <form:checkbox path="saveOrder" class="form-check-input" role="switch" id="flexSwitchCheckDefault"/>
-                                                        <form:label path="saveOrder" class="form-check-label"><spring:message code="saveOrderLabel"/></form:label>
-                                                    </div>
                                                 </form:form>
+                                                <div class="form-check form-switch">
+                                                    <form:form action="/luxuryShop/cart/saveOrder" modelAttribute="cartItem" method="post">
+                                                        <%--<form:label path="saveOrder" class="form-check-label"><spring:message code="saveOrderLabel"/></form:label>--%>
+                                                        <sec:authorize access="isAuthenticated()">
+                                                            <div class="row row-cols-2 accordionLabel accordion accordion-flush">
+                                                                <div class="accordion-header col" id="panelsStayOpen-headingOne">
+                                                                    <c:if test="${cartSaved}">
+                                                                        <form:button class="btn btn-outline-secondary" disabled="true"><img id="saveComandImg" src="<spring:url value="/images/save.png"/> "/></form:button>
+                                                                    </c:if>
+                                                                    <c:if test="${!cartSaved}">
+                                                                        <form:button class="btn btn-outline-secondary"><img id="saveComandImg" src="<spring:url value="/images/save.png"/> "/></form:button>
+                                                                    </c:if>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                                                        <spring:message code="saveOrderLabel"/>
+                                                                    </button>
+                                                                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                                                                        <div class="accordion-body">
+                                                                            <spring:message code="accordionLabel"/>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <c:if test="${cartSaved}">
+                                                                <div class="alert alert-success" role="alert">
+                                                                    <spring:message code="yourComandIsSavedLabel"/>
+                                                                </div>
+                                                            </c:if>
+                                                        </sec:authorize>
+                                                    </form:form>
+                                                </div>
                                             </div>
                                             <div class="col">
                                                 <label>Total :</label>

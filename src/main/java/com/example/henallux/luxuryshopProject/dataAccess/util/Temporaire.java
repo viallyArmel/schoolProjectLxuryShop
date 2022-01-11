@@ -2,6 +2,8 @@ package com.example.henallux.luxuryshopProject.dataAccess.util;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.Date;
+
 public class Temporaire {
     public static void main(String[] args) {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
@@ -12,6 +14,7 @@ public class Temporaire {
 
         String pwdEncode = bCryptPasswordEncoder.encode("lala12");
         System.out.println(pwdEncode);
+
 
     }
 }

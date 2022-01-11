@@ -11,6 +11,6 @@
         <title>paypal response</title>
     </head>
     <body>
-        <h1>Payment effectué</h1>
+        <h1>Payment effectué </h1>
     </body>
 </html>

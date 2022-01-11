@@ -5,7 +5,7 @@
   Time: 21:56
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@include file="../include/importTags.jsp"%>
 <html>
     <head>
@@ -42,6 +42,11 @@
                             <h2 class="text-center"><spring:message code="welcomeBackLabel"/></h2>
                             <%--@elvariable id="customer" type="java"--%>
                             <form:form class="text-left clearfix" modelAttribute="customer" method="post" >
+                                <c:if test="badCredential">
+                                    <div class="alert alert-danger" role="alert">
+                                        <spring:message code="badCredentialsLabel"/>
+                                    </div>
+                                </c:if>
                                 <div class="form-group">
                                     <c:set var="username"><spring:message code="usernameLabel"/></c:set>
                                     <form:input type="text" class="form-control"  placeholder="${username}" path="username"/>

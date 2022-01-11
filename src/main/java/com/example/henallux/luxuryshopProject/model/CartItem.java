@@ -18,6 +18,7 @@ public class CartItem {
     private Integer categId;
 
     public CartItem (){
+        setSaveOrder(false);
     }
 
     public void setSaveOrder(boolean saveOrder) {
