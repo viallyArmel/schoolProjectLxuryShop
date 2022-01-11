@@ -78,7 +78,6 @@
                                 </div>
                                 <div class="form-group">
                                     <form:input type="date" class="form-control" value="23-10-1998" min="01-01-1400" max="01-01-2014"  path="date" pattern="\d{2}-\d{2}-\d{4}" />
-                                    <p><form:errors path="date" class="err"><spring:message code="dateFormatError"/></form:errors></p>
                                 </div>
                                 <div class="form-group">
                                     <form:select class="form-control"  path="gender" >
@@ -120,7 +119,7 @@
                             <p class="mt-20"><spring:message code="AllreadyAccountLabel"/><a href="<spring:url value= "/login" />"> <spring:message code="loginButton" /></a></p>
                             <c:if test="${customerExists}">
                                 <div class="alert alert-danger" role="alert">
-                                    You already exist ! Try to login
+                                    You are already exists ! try to login
                                 </div>
                             </c:if>
                         </div>
