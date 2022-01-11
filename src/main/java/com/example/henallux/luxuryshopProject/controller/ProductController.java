@@ -6,6 +6,7 @@ import com.example.henallux.luxuryshopProject.dataAccess.dao.ProductDataAccess;
 import com.example.henallux.luxuryshopProject.model.Cart;
 import com.example.henallux.luxuryshopProject.model.CartItem;
 import com.example.henallux.luxuryshopProject.model.CurrPage;
+import com.example.henallux.luxuryshopProject.service.PurchaseManager;
 import com.example.henallux.luxuryshopProject.service.TranslationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,11 +23,13 @@ import java.util.Locale;
 public class ProductController {
     private ProductDataAccess productDataAccess;
     private TranslationService translationService;
+    private PurchaseManager purchaseManager;
 
     @Autowired
-    public ProductController(ProductDAO productDAO, TranslationService translationService){
+    public ProductController(ProductDAO productDAO, TranslationService translationService, PurchaseManager purchaseManager){
         this.productDataAccess = productDAO;
         this.translationService = translationService;
+        this.purchaseManager = purchaseManager;
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/all")
@@ -79,6 +82,7 @@ public class ProductController {
                 cart.addItem(cartItem.getProductId(), cartItem);
             }
         }
+        purchaseManager.applyCartReduction(cart);
 
 
         int id = cartItem.getCategId();

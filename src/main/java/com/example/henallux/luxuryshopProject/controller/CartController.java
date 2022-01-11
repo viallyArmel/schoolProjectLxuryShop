@@ -7,7 +7,10 @@ import com.example.henallux.luxuryshopProject.service.PurchaseManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.Locale;
 
@@ -28,11 +31,7 @@ public class CartController {
         model.addAttribute(Constants.CURRENT_CART, cart);
         model.addAttribute("cartItem", new CartItem());
         model.addAttribute("locale", locale);
-        for(CartItem item : cart.getItems().values()) {
-            purchaseManager.applyCartItemReduction(item);
-        }
         purchaseManager.applyCartReduction(cart);
-        System.out.println("Cart has reduction : " + cart.hasReduction());
         return "temp:cart";
     }
 

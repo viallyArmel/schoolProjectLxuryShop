@@ -95,7 +95,7 @@ CREATE TABLE order_line
 (
     `id`       INT PRIMARY KEY AUTO_INCREMENT,
     `quantity` INT           NOT NULL,
-    `price`    DECIMAL(4, 2) NOT NULL,
+    `price`    DECIMAL(9, 2) NOT NULL,
     `order`    INT           NOT NULL,
     `product`  INT           NOT NULL,
     CONSTRAINT `order_line_quantity_chk` CHECK (`quantity` > 0),

@@ -6,10 +6,7 @@ import java.text.DecimalFormat;
 import java.util.HashMap;
 
 public class Cart {
-    private static final double REDUC_MAX_CART = 0.4;
     private HashMap<Integer, CartItem> items;
-    private double reduction;
-    // private boolean hasReduction;
 
     public Cart(){
         this.items = new HashMap<>();
@@ -19,21 +16,13 @@ public class Cart {
         this.items.put(key, cartItem);
     }
 
-    public double getReduction(){
-        return this.reduction;
-    }
-
-    public void setReduction(double reduction){
-        this.reduction = Math.min(reduction, REDUC_MAX_CART);
-    }
-
     public boolean hasReduction() {
         boolean itemHaveReduction = false;
         for(CartItem item : items.values()){
             if(item.getReduction() > 0)
                 itemHaveReduction = true;
         }
-        return itemHaveReduction || reduction > 0;
+        return itemHaveReduction;
     }
 
     // public void setHasReduction(boolean hasReduction) {
@@ -52,9 +41,6 @@ public class Cart {
         double total = 0;
         for(CartItem cartItem : this.items.values()){
             total += cartItem.totalPrice(applyReductions);
-        }
-        if(applyReductions){
-            total -= total * getReduction();
         }
         return total;
     }

@@ -1,73 +1,74 @@
 package com.example.henallux.luxuryshopProject.service;
 
-import com.example.henallux.luxuryshopProject.dataAccess.entity.CustomerEntity;
-import com.example.henallux.luxuryshopProject.dataAccess.repository.OrderLineRepository;
 import com.example.henallux.luxuryshopProject.dataAccess.repository.OrderRepository;
 import com.example.henallux.luxuryshopProject.model.Cart;
 import com.example.henallux.luxuryshopProject.model.CartItem;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
-class PurchaseManagerTest {
+import static org.mockito.Mockito.when;
+@RunWith(MockitoJUnitRunner.class)
+public class PurchaseManagerTest {
 
-    private static final String EMAIL = "pomanil@icloud.com";
+    private static final String EMAIL_2_ORDERS = "pomanil@icloud.com";
+    private static final String EMAIL_10_ORDERS = "armelvially418@icloud.com";
 
     @Mock
     private OrderRepository orderRepository;
-    @Mock
-    private OrderLineRepository orderLineRepository;
-    @Mock
-    private Cart cartMocked;
 
     private PurchaseManager purchaseManager;
-    private CustomerEntity customerEntity;
     private Cart cart;
     private CartItem item;
 
-    @BeforeEach
+    @Before
     public void setup(){
-        this.purchaseManager = new PurchaseManager(orderLineRepository);
-        customerEntity = new CustomerEntity();
+        this.purchaseManager = new PurchaseManager(orderRepository);
         cart = new Cart();
         item = new CartItem();
+        item.setPrice(100d);
         cart.addItem(1, item);
     }
 
     @Test
-    @DisplayName("applyCartReductions : totalPrice > 500")
-    public void applyCartReductionsLess(){
-        item.setPrice(100d);
+    public void applyCartReductionKO(){
+        item.setQuantity(1);
         purchaseManager.applyCartReduction(cart);
-        Assertions.assertEquals(cart.getReduction(), 0);
+        Assert.assertEquals(item.getReduction(), 0d, 0.01);
     }
 
     @Test
-    @DisplayName("applyCartReductions : totalPrice <= 500")
-    public void applyCartReductions(){
-        item.setPrice(500d);
-        purchaseManager.applyCartItemReduction(item);
-        Assertions.assertEquals(item.getReduction(), (500 * 0.05), 0.01);
+    public void applyCartReductionOK(){
+        item.setQuantity(2);
+        purchaseManager.applyCartReduction(cart);
+        Assert.assertEquals(item.getReduction(), 0.05, 0.001);
     }
     @Test
-    @DisplayName("applyCartItemReductions : totalPrice > 500")
-    public void applyCartItemReductionsLess(){
-        item.setPrice(100d);
-        purchaseManager.applyCartItemReduction(item);
-        Assertions.assertEquals(item.getReduction(), 0);
+    public void applyCartReductionOKGreater(){
+        item.setQuantity(3);
+        purchaseManager.applyCartReduction(cart);
+        Assert.assertEquals(item.getReduction(), 0.1, 0.001);
     }
 
     @Test
-    @DisplayName("applyCartItemReductions : totalPrice <= 500")
-    public void applyCartItemReductions(){
-        item.setPrice(500d);
-        purchaseManager.applyCartItemReduction(item);
-        Assertions.assertEquals(item.getReduction(), (500 - 500 * 0.05), 0.01);
+    public void applyCartReductionReductionCap(){
+        item.setQuantity(5);
+        purchaseManager.applyCartReduction(cart);
+        Assert.assertEquals(item.getReduction(), 0.2, 0.001);
     }
 
-    // when(orderRepository.countOrderEntityByCustomer(customerEntity)).thenReturn(5);
-    // Assertions.assertEquals(0, cart.getReduction());
+    @Test
+    public void countOrderEntityByCustomerEmailIn_2() {
+        when(orderRepository.countOrderEntityByCustomerEmail(EMAIL_2_ORDERS)).thenReturn(2);
+        Assert.assertEquals(purchaseManager.calculateCustomerReduction(EMAIL_2_ORDERS), .0, 0.001);
+    }
 
+    @Test
+    public void countOrderEntityByCustomerEmailIn_10() {
+        when(orderRepository.countOrderEntityByCustomerEmail(EMAIL_10_ORDERS)).thenReturn(10);
+        Assert.assertEquals(purchaseManager.calculateCustomerReduction(EMAIL_10_ORDERS), 0.05, 0.001);
+    }
 }
