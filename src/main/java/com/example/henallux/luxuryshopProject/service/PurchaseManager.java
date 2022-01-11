@@ -1,5 +1,6 @@
-
 package com.example.henallux.luxuryshopProject.service;
+
+import com.example.henallux.luxuryshopProject.DecimalFormater;
 import com.example.henallux.luxuryshopProject.dataAccess.repository.OrderRepository;
 import com.example.henallux.luxuryshopProject.model.Cart;
 import com.example.henallux.luxuryshopProject.model.CartItem;
@@ -28,7 +29,6 @@ public class PurchaseManager {
         if(item.getQuantity() >= QUANTITY_TO_GET_REDUC)
             reductionPc =  (item.getQuantity() - QUANTITY_TO_GET_REDUC + 1) * REDUC_PC_TRANCHE;
         item.setReduction(Math.min(reductionPc, REDUC_MAX));
-        System.out.println("reduction to cart item : " + item.getReduction());
     }
 
     public void applyCartReduction(Cart cart) {

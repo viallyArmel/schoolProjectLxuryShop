@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="include/importTags.jsp"%>
+<%@ page import="com.example.henallux.luxuryshopProject.DecimalFormater" %>
 <html>
     <head>
         <title>Cart</title>
@@ -56,9 +57,10 @@
                                                 </td>
                                                 <td class="tableCol">
                                                     <c:if test="${cart.value.reduction > 0}">
-                                                        <span class="canceled">${cart.value.price}€</span>
+                                                        <span class="canceled">${DecimalFormater.fromDoubleToString(cart.value.price)}€</span>
                                                     </c:if>
-                                                    <span>${cart.value.price - cart.value.price * cart.value.reduction}€</span>
+                                                    <span>${DecimalFormater.fromDoubleToString(cart.value.price - cart.value.price * cart.value.reduction)}€</span>
+
                                                 </td>
                                                 <td class="tableCol"><%--@elvariable id="cartItem" type="java"--%>
                                                     <div class="row row-cols-3">

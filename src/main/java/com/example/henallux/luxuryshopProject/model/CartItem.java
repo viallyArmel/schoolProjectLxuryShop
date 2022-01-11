@@ -1,9 +1,6 @@
 package com.example.henallux.luxuryshopProject.model;
 
-import org.springframework.format.annotation.NumberFormat;
-
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
+import com.example.henallux.luxuryshopProject.DecimalFormater;
 
 public class CartItem {
     private Integer productId;
@@ -84,11 +81,11 @@ public class CartItem {
         this.quantity = Math.max(quantity, 0);
     }
 
-    public double totalPrice(boolean applyReduction){
+    public double getTotalPrice(boolean applyReduction){
         return (price - (applyReduction? price * reduction : 0)) * quantity;
     }
 
-    public double totalPrice() {
-        return totalPrice(true);
+    public double getTotalPrice() {
+        return getTotalPrice(true);
     }
 }
