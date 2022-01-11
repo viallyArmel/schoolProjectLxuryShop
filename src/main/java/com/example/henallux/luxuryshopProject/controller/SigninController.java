@@ -1,16 +1,15 @@
 package com.example.henallux.luxuryshopProject.controller;
 
+import com.example.henallux.luxuryshopProject.Constants;
 import com.example.henallux.luxuryshopProject.dataAccess.dao.CustomerDAO;
 import com.example.henallux.luxuryshopProject.dataAccess.dao.CustomerDataAccess;
-import com.example.henallux.luxuryshopProject.dataAccess.util.Utils;
 import com.example.henallux.luxuryshopProject.model.Customer;
+import com.example.henallux.luxuryshopProject.dataAccess.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -37,9 +36,7 @@ public class SigninController {
     public String getInscription (Model model, @Valid @ModelAttribute(value = "user") Customer customer,
                                   final BindingResult errors){
 
-        if (!errors.hasErrors()
-                && !customerDataAccess.countByUsernameAndEmail(customer.getUsername(), customer.getEmail())
-                && (customer.getPasswordAgain().equals(customer.getPassword()))) {
+        if (!errors.hasErrors() && !customerDataAccess.countByUsernameAndEmail(customer.getUsername(), customer.getEmail()) && customer.getPasswordAgain().equals(customer.getPassword())) {
            customerDataAccess.save(customer);
            return "redirect:/login";
         }
