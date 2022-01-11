@@ -5,8 +5,7 @@
   Time: 21:18
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page pageEncoding="UTF-8"
-         contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="include/importTags.jsp"%>
 <html>
     <head>
@@ -37,11 +36,6 @@
                     <c:forEach items="${products}" var="prod" varStatus="status">
                         <div class="product-item">
                             <div class="product-thumb">
-                                <c:if test="${prod.outOfStock}">
-                                    <span class="bage">
-                                        <c:out value="Out of stock" escapeXml="false" />
-                                    </span>
-                                </c:if>
                                 <a href="<spring:url value="/products/single/${prod.name}/${prod.category.id}"/> ">
                                     <img class="img-responsive" src="<spring:url value="${prod.picture}${extension}"/>" alt="${prod.name}" />
                                 </a>
