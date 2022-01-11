@@ -80,7 +80,8 @@ public class CartController {
     public String paymentFailed(){
         return "redirect:/cart";
     }
-    @RequestMapping(value = "/saveOrder")
+
+    @RequestMapping(value = "/saveOrder", method = RequestMethod.POST)
     public String saveOrder(Authentication authentication, Model model, @ModelAttribute(value = "cartItem")CartItem cartItem, @ModelAttribute(value = Constants.CURRENT_CART)Cart cart){
 
         Customer customer = (Customer) authentication.getPrincipal();
