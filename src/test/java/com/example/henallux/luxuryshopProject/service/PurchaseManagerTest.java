@@ -37,38 +37,38 @@ public class PurchaseManagerTest {
     public void applyCartReductionKO(){
         item.setQuantity(1);
         purchaseManager.applyCartReduction(cart);
-        Assert.assertEquals(item.getReduction(), 0d, 0.01);
+        Assert.assertEquals(0d, item.getReduction(), 0.01);
     }
 
     @Test
     public void applyCartReductionOK(){
         item.setQuantity(2);
         purchaseManager.applyCartReduction(cart);
-        Assert.assertEquals(item.getReduction(), 0.05, 0.001);
+        Assert.assertEquals(0.05, item.getReduction(), 0.001);
     }
     @Test
     public void applyCartReductionOKGreater(){
         item.setQuantity(3);
         purchaseManager.applyCartReduction(cart);
-        Assert.assertEquals(item.getReduction(), 0.1, 0.001);
+        Assert.assertEquals(0.10, item.getReduction(),  0.001);
     }
 
     @Test
     public void applyCartReductionReductionCap(){
         item.setQuantity(5);
         purchaseManager.applyCartReduction(cart);
-        Assert.assertEquals(item.getReduction(), 0.2, 0.001);
+        Assert.assertEquals(0.2, item.getReduction(), 0.001);
     }
 
     @Test
     public void countOrderEntityByCustomerEmailIn_2() {
         when(orderRepository.countOrderEntityByCustomerEmail(EMAIL_2_ORDERS)).thenReturn(2);
-        Assert.assertEquals(purchaseManager.calculateCustomerReduction(EMAIL_2_ORDERS), .0, 0.001);
+        Assert.assertEquals(.0, purchaseManager.calculateCustomerReduction(EMAIL_2_ORDERS), 0.001);
     }
 
     @Test
     public void countOrderEntityByCustomerEmailIn_10() {
         when(orderRepository.countOrderEntityByCustomerEmail(EMAIL_10_ORDERS)).thenReturn(10);
-        Assert.assertEquals(purchaseManager.calculateCustomerReduction(EMAIL_10_ORDERS), 0.05, 0.001);
+        Assert.assertEquals(0.05, purchaseManager.calculateCustomerReduction(EMAIL_10_ORDERS), 0.001);
     }
 }

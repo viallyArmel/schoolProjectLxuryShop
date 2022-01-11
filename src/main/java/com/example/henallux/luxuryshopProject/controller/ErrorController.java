@@ -14,6 +14,4 @@ public class ErrorController implements org.springframework.boot.web.servlet.err
         model.addAttribute("title", "404-Error");
         return "ajax:404error";
     }
-
-
 }
