@@ -3,20 +3,21 @@ package com.example.henallux.luxuryshopProject.dataAccess.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "orderline")
+@Table(name = "order_line")
 public class OrderLineEntity {
 
     @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column (name = "id")
     private Integer id;
     @Column (name = "quantity")
     private Integer quantity;
     @Column (name = "price")
     private Double price;
-    @JoinColumn(name = "orderLine_order_fk", referencedColumnName = "id")
+    @JoinColumn(name = "`order`", referencedColumnName = "id")
     @ManyToOne
     private OrderEntity order;
-    @JoinColumn(name = "orderLine_product_fk", referencedColumnName = "id")
+    @JoinColumn(name = "product", referencedColumnName = "id")
     @ManyToOne
     private ProductEntity product;
 
