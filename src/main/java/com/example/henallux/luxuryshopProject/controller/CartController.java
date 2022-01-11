@@ -1,10 +1,11 @@
 package com.example.henallux.luxuryshopProject.controller;
 
 import com.example.henallux.luxuryshopProject.Constants;
-import com.example.henallux.luxuryshopProject.model.Cart;
-import com.example.henallux.luxuryshopProject.model.CartItem;
+import com.example.henallux.luxuryshopProject.dataAccess.dao.*;
+import com.example.henallux.luxuryshopProject.model.*;
 import com.example.henallux.luxuryshopProject.service.PurchaseManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
