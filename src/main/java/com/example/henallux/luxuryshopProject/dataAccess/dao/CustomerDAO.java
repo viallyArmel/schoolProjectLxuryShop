@@ -48,15 +48,7 @@ public class CustomerDAO implements CustomerDataAccess{
     }
 
     @Override
-    public Boolean customerAlreadyExist(Customer customer) {
-
-        CustomerEntity customerEntity = providerConverter.userModelToUserEntity(customer);
-        Example <CustomerEntity> exampleEntity  = Example.of(customerEntity);
-        return customerRepository.exists(exampleEntity);
-    }
-
-    @Override
-    public Boolean countByUsernameAndEmail(String username, String email) {
-        return customerRepository.countByUsernameAndEmail(username, email) > 0;
+    public Boolean customerAlreadyExists(String username, String email) {
+        return customerRepository.countByUsernameOrEmail(username, email) > 0;
     }
 }

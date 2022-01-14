@@ -8,6 +8,5 @@ public interface CustomerDataAccess {
     ArrayList<Customer> getAllCustomers();
     Customer save(Customer customer);
     Customer findByUsername(String username);
-    Boolean customerAlreadyExist(Customer customer);
-    Boolean countByUsernameAndEmail(String username, String email);
+    Boolean customerAlreadyExists(String username, String email);
 }

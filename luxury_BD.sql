@@ -39,8 +39,7 @@ CREATE TABLE customer
     `credentials_non_expired` BIT          NOT NULL,
     `enabled`                 BIT          NOT NULL,
     PRIMARY KEY (`id`),
-    CONSTRAINT `user_firstname_chk` CHECK (`firstname` REGEXP '(?i)(^[a-z])((?![ .,''-]$)[a-z .,''-]){1,29}$'
-) ,
+    CONSTRAINT `user_firstname_chk` CHECK (`firstname` REGEXP '(?i)(^[a-z])((?![ .,''-]$)[a-z .,''-]){1,29}$'),
       CONSTRAINT `user_lastname_chk` CHECK (`lastname` REGEXP '(?i)(^[a-z])((?![ .,''-]$)[a-z .,''-]){1,29}$'),
       CONSTRAINT `user_username_chk` CHECK (`username` REGEXP '^(?=[a-zA-Z0-9._]{4,20}$)(?!.*[_.]{2})[^_.].*[^_.]$'),
       CONSTRAINT `user_password_chk` CHECK (`password` REGEXP '^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\\d]){1,})(?=(.*[\\W]){1,})(?!.*\\s).{6,}$'),
@@ -121,7 +120,7 @@ CREATE TRIGGER valid_customer_birthdate
     BEFORE INSERT
     ON customer
     FOR EACH ROW IF YEAR(NEW.`birthdate`) > YEAR(SYSDATE())-18 THEN
-	SIGNAL SQLSTATE '45001' set message_text = "User must be at least 18 years old.";
+	SIGNAL SQLSTATE '45001';
 END IF;
 //
 delimiter ;
@@ -250,7 +249,7 @@ VALUES ('man set outfit 1', '45', '/images/manSetOutfit/manSetOutfit1', true, 1)
        ('women shoes 20', '76', '/images/womenShoes/womanShoes20', false, 6),
        ('women shoes 21', '76', '/images/womenShoes/womanShoes21', true, 6);
 
-INSERT INTO order (`date`, customer) VALUES
+INSERT INTO `order` (`date`, customer) VALUES
 (str_to_date('2012-10-10', '%Y-%m-%d'), 1),
 (str_to_date('2012-11-12', '%Y-%m-%d'), 1),
 (str_to_date('2012-12-25', '%Y-%m-%d'), 1),

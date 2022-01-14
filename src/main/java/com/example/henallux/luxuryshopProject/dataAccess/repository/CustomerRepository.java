@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.Query;
 public interface CustomerRepository extends JpaRepository<CustomerEntity, Integer> {
     CustomerEntity findByUsername(String username);
     CustomerEntity findByEmail(String email);
-    Integer countByUsernameAndEmail(String username, String email);
+    Integer countByUsernameOrEmail(String username, String email);
 }

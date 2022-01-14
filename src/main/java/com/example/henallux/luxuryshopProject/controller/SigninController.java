@@ -1,6 +1,5 @@
 package com.example.henallux.luxuryshopProject.controller;
 
-import com.example.henallux.luxuryshopProject.Constants;
 import com.example.henallux.luxuryshopProject.dataAccess.dao.CustomerDAO;
 import com.example.henallux.luxuryshopProject.dataAccess.dao.CustomerDataAccess;
 import com.example.henallux.luxuryshopProject.model.Customer;
@@ -36,11 +35,11 @@ public class SigninController {
     public String getInscription (Model model, @Valid @ModelAttribute(value = "user") Customer customer,
                                   final BindingResult errors){
 
-        if (!errors.hasErrors() && !customerDataAccess.countByUsernameAndEmail(customer.getUsername(), customer.getEmail()) && customer.getPasswordAgain().equals(customer.getPassword())) {
+        if (!errors.hasErrors() && !customerDataAccess.customerAlreadyExists(customer.getUsername(), customer.getEmail()) && customer.getPasswordAgain().equals(customer.getPassword())) {
            customerDataAccess.save(customer);
            return "redirect:/login";
         }
-        if (customerDataAccess.countByUsernameAndEmail(customer.getUsername(), customer.getEmail())){
+        if (customerDataAccess.customerAlreadyExists(customer.getUsername(), customer.getEmail())){
             model.addAttribute("customerExists", true);
         }
         if (!customer.getPasswordAgain().equals(customer.getPassword()))

@@ -123,38 +123,39 @@
                                                 <a href="<spring:url value="/redirectCart"/>"><form:button disabled="true" class="btn btn-main pull-right"><spring:message code="buyButton"/></form:button></a>
                                             </sec:authorize>
                                         </form:form>
-                                        <div class="form-check form-switch">
-                                            <form:form action="/luxuryShop/cart/saveOrder" modelAttribute="cartItem" method="post">
-                                                <%--<form:label path="saveOrder" class="form-check-label"><spring:message code="saveOrderLabel"/></form:label>--%>
-                                                <sec:authorize access="isAuthenticated()">
-                                                    <div class="row row-cols-2 accordionLabel accordion accordion-flush">
-                                                        <div class="accordion-header col" id="panelsStayOpen-headingOne">
-                                                            <c:if test="${cartSaved}">
-                                                                <form:button class="btn btn-outline-secondary" disabled="true"><img id="saveComandImg" src="<spring:url value="/images/save.png"/> "/></form:button>
-                                                            </c:if>
-                                                            <c:if test="${!cartSaved}">
-                                                                <form:button class="btn btn-outline-secondary"><img id="saveComandImg" src="<spring:url value="/images/save.png"/> "/></form:button>
-                                                            </c:if>
-                                                        </div>
-                                                        <div class="col">
-                                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                                                                <spring:message code="saveOrderLabel"/>
-                                                            </button>
-                                                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-                                                                <div class="accordion-body">
-                                                                    <spring:message code="accordionLabel"/>
+                                            <div class="form-check form-switch">
+                                                <form:form action="/luxuryShop/cart/saveOrder" modelAttribute="cartItem" method="post">
+                                                    <%--<form:label path="saveOrder" class="form-check-label"><spring:message code="saveOrderLabel"/></form:label>--%>
+                                                    <sec:authorize access="isAuthenticated()">
+                                                        <div class="row row-cols-2 accordionLabel accordion accordion-flush">
+                                                            <div class="accordion-header col" id="panelsStayOpen-headingOne">
+                                                                <c:if test="${cartSaved}">
+                                                                    <p>CART SAVED !!!!!!!!!!!</p>
+                                                                    <form:button class="btn btn-outline-secondary" disabled="true"><img id="saveComandImg" src="<spring:url value="/images/save.png"/> "/></form:button>
+                                                                </c:if>
+                                                                <c:if test="${!cartSaved}">
+                                                                    <form:button class="btn btn-outline-secondary"><img id="saveComandImg" src="<spring:url value="/images/save.png"/> "/></form:button>
+                                                                </c:if>
+                                                            </div>
+                                                            <div class="col">
+                                                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                                                    <spring:message code="saveOrderLabel"/>
+                                                                </button>
+                                                                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                                                                    <div class="accordion-body">
+                                                                        <spring:message code="accordionLabel"/>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <c:if test="${cartSaved}">
-                                                        <div class="alert alert-success" role="alert">
-                                                            <spring:message code="yourComandIsSavedLabel"/>
-                                                        </div>
-                                                    </c:if>
-                                                </sec:authorize>
-                                            </form:form>
-                                        </div>
+                                                        <c:if test="${cartSaved}">
+                                                            <div class="alert alert-success" role="alert">
+                                                                <spring:message code="orderSavedLabel"/>
+                                                            </div>
+                                                        </c:if>
+                                                    </sec:authorize>
+                                                </form:form>
+                                            </div>
                                     </div>
                                     <div class="col">
                                         <label>Total :</label>
