@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CustomerRepository extends JpaRepository<CustomerEntity, Integer> {
     CustomerEntity findByUsername(String username);
-    Integer countByUsernameAndEmail(String username, String email);
+    Integer countByUsernameOrEmail(String username, String email);
 }

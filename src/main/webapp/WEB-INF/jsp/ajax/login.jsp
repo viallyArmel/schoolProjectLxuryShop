@@ -42,11 +42,9 @@
                             <h2 class="text-center"><spring:message code="welcomeBackLabel"/></h2>
                             <%--@elvariable id="customer" type="java"--%>
                             <form:form class="text-left clearfix" modelAttribute="customer" method="post" >
-                                <c:if test="badCredential">
-                                    <div class="alert alert-danger" role="alert">
-                                        <spring:message code="badCredentialsLabel"/>
-                                    </div>
-                                </c:if>
+                                <div class="form-group ${alertClass}" role="alert">
+                                    <spring:message code="${noCredential}"/>
+                                </div>
                                 <div class="form-group">
                                     <c:set var="username"><spring:message code="usernameLabel"/></c:set>
                                     <form:input type="text" class="form-control"  placeholder="${username}" path="username"/>

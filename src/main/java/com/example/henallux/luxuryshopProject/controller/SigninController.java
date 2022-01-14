@@ -36,11 +36,11 @@ public class SigninController {
     public String getInscription (Model model, @Valid @ModelAttribute(value = "user") Customer customer,
                                   final BindingResult errors){
 
-        if (!errors.hasErrors() && !customerDataAccess.countByUsernameAndEmail(customer.getUsername(), customer.getEmail()) && customer.getPasswordAgain().equals(customer.getPassword())) {
+        if (!errors.hasErrors() && !customerDataAccess.userAlreadyExists(customer.getUsername(), customer.getEmail()) && customer.getPasswordAgain().equals(customer.getPassword())) {
            customerDataAccess.save(customer);
            return "redirect:/login";
         }
-        if (customerDataAccess.countByUsernameAndEmail(customer.getUsername(), customer.getEmail())){
+        if (customerDataAccess.userAlreadyExists(customer.getUsername(), customer.getEmail())){
             model.addAttribute("customerExists", true);
         }
         if (!customer.getPasswordAgain().equals(customer.getPassword()))
