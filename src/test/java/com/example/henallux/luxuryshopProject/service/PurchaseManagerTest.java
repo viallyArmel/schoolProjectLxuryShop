@@ -29,7 +29,7 @@ public class PurchaseManagerTest {
         this.purchaseManager = new PurchaseManager(orderRepository);
         cart = new Cart();
         item = new CartItem();
-        item.setPrice(100d);
+        item.setPrice(100.0);
         cart.addItem(1, item);
     }
 
@@ -37,7 +37,7 @@ public class PurchaseManagerTest {
     public void applyCartReductionKO(){
         item.setQuantity(1);
         purchaseManager.applyCartReduction(cart);
-        Assert.assertEquals(0d, item.getReduction(), 0.01);
+        Assert.assertEquals(0.0, item.getReduction(), 0.01);
     }
 
     @Test

@@ -11,7 +11,7 @@ public class OrderEntity {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "date_order")
+    @Column(name = "date")
     private Date date;
     @JoinColumn(name = "customer", referencedColumnName = "id")
     @ManyToOne

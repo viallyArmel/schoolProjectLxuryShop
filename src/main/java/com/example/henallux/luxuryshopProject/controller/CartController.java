@@ -96,7 +96,7 @@ public class CartController {
         ArrayList<OrderLine> orderLines = new ArrayList<>();
         for (CartItem item : cart.getItems().values()){
             Product product = productDataAccess.findProductEntityByName(item.getLabel());
-            orderLines.add(new OrderLine(item.getQuantity(), item.getPrice(), product, order));
+            orderLines.add(new OrderLine(item.getQuantity(), item.getPrice() - item.getReduction() * item.getPrice(), product, order));
         }
 
         for(OrderLine orderLine : orderLines){
