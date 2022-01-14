@@ -132,7 +132,7 @@
                         </ul>
                         <ul class="footer-menu text-uppercase">
                             <li>
-                                <a href="<spring:url value="contact.html"/>">CONTACT</a>
+                                <a href="<spring:url value="/contact"/>">CONTACT</a>
                             </li>
                             <li>
                                 <a href="<spring:url value="/products/all"/>"><spring:message code="shopLabel"/></a>
@@ -141,7 +141,7 @@
                                 <a href="<spring:url value="/about"/>"><spring:message code="aboutLabel"/></a>
                             </li>
                             <li>
-                                <a href="<spring:url value="contact.html"/>"><spring:message code="policyLabel"/></a>
+                                <a href="<spring:url value="/privacy"/>"><spring:message code="policyLabel"/></a>
                             </li>
                         </ul>
                         <p class="copyright-text">Copyright &copy;2021, Designed &amp; Developed by <a target="_blank" href="<spring:url value="https://github.com/viallyArmel/schoolProjectLxuryShop"/>">Vially & Pierre-olivier</a></p>
