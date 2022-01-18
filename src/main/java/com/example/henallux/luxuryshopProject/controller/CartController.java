@@ -41,6 +41,7 @@ public class CartController {
         model.addAttribute(Constants.CURRENT_CART, cart);
         model.addAttribute("cartItem", new CartItem());
         model.addAttribute("locale", locale);
+        model.addAttribute("cartSaved", getSaveCurrCart());
         purchaseManager.applyCartReduction(cart);
         return "temp:cart";
     }

@@ -130,7 +130,6 @@
                                                         <div class="row row-cols-2 accordionLabel accordion accordion-flush">
                                                             <div class="accordion-header col" id="panelsStayOpen-headingOne">
                                                                 <c:if test="${cartSaved}">
-                                                                    <p>CART SAVED !!!!!!!!!!!</p>
                                                                     <form:button class="btn btn-outline-secondary" disabled="true"><img id="saveComandImg" src="<spring:url value="/images/save.png"/> "/></form:button>
                                                                 </c:if>
                                                                 <c:if test="${!cartSaved}">
