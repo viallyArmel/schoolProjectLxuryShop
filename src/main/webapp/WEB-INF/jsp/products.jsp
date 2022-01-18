@@ -19,7 +19,7 @@
                         <div class="content">
                             <h1 class="page-name">${pageName}</h1>
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="<spring:url value="/home"/>">Home  </a></li>
+                                <li class="breadcrumb-item"><a href="<spring:url value="/home"/>"><spring:message code="homeLabel" />  </a></li>
                                 <li class="breadcrumb-item active">${pageName}</li>
                             </ol>
                         </div>

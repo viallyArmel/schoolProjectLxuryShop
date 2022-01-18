@@ -4,6 +4,6 @@ server:
     context-path: /luxuryShop
 spring:
   datasource:
-    password: password
+    password: Vially418.
     url: jdbc:mysql://localhost:3306/luxurydb?user=root
     driver-class-name: com.mysql.cj.jdbc.Driver

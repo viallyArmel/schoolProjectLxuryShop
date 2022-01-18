@@ -1,6 +1,8 @@
 package com.example.henallux.luxuryshopProject.model;
 
-import com.example.henallux.luxuryshopProject.DecimalFormater;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 public class CartItem {
     private Integer productId;
@@ -10,6 +12,8 @@ public class CartItem {
     private Double reduction;
     private Boolean saveOrder;
 
+    @NotNull
+    @Min(value = 1)
     private Integer quantity;
     private Integer categId;
 

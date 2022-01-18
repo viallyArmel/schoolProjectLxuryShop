@@ -52,7 +52,7 @@
                                 <div class="product-quantity">
                                     <span><spring:message code="quantityLabel"/>:</span>
                                     <div class="product-quantity-slider">
-                                        <form:input path="quantity" type="number"  min="1" max="100" value="1"/>
+                                        <form:input path="quantity" type="number" value="1"/>
                                         <form:errors path="quantity" class="err" />
                                         <form:input path="categId" type="hidden" value="${categId}"/>
                                         <form:input path="productId" type="hidden" value="${product.id}"/>

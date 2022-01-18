@@ -97,11 +97,11 @@
                                     <div class="col">
                                             <%--@elvariable id="cartItem" type="java"--%>
                                         <form:form method="post"
-                                                   action=" https://www.sandbox.paypal.com/cgi-bin/webscr"
+                                                   action="https://www.sandbox.paypal.com/cgi-bin/webscr"
                                                    modelAttribute="cartItem">
 
-                                            <input type="hidden" name="business" value="armelvially418@yahoo.fr" />
-                                            <input type="hidden" name="cert_id" value="AWA0RZ0pvDG-w-EYUR4dcBJpMgEnDlolGGYzkMAANmQnHwhNd8X0ruBRJ9Hvat6J-Iz_FsytLuXHW3IQ" />
+                                            <input type="hidden" name="business" value="armelvially446@gmail.com" />
+                                            <input type="hidden" name="cert_id" value="Ad_mUmteBsIDK6NlggnUku_FaoaH5GeCwDcXidx7_5_JYqP48FBPy05csYFMjMlGVBEoyMjczB7zM_i7" />
                                             <input type="hidden" name="cmd" value="_cart" />
                                             <input type="hidden" name="upload" value="1" />
 
@@ -110,7 +110,7 @@
                                                 <input type="hidden" name="amount_${status.count}" value="${cart.value.price - cart.value.price * cart.value.reduction}" />
                                                 <input type="hidden" name="item_name_${status.count}" value="${cart.value.label}" />
                                             </c:forEach>
-                                            <input type="hidden" name="return" value="http://localhost:8082/luxuryShop/home" />
+                                            <input type="hidden" name="return" value="http://localhost:8082/luxuryShop/cart/paymentSuccess" />
                                             <input type="hidden" name="cancel_return" value="http://localhost:8082/luxuryShop/cart/paymentFailed" />
                                             <input type="hidden" name="currency_code" value="EUR" />
                                             <input type="hidden" name="lc" value="${locale.getLanguage()}-${locale.getCountry()}" />
@@ -130,7 +130,6 @@
                                                         <div class="row row-cols-2 accordionLabel accordion accordion-flush">
                                                             <div class="accordion-header col" id="panelsStayOpen-headingOne">
                                                                 <c:if test="${cartSaved}">
-                                                                    <p>CART SAVED !!!!!!!!!!!</p>
                                                                     <form:button class="btn btn-outline-secondary" disabled="true"><img id="saveComandImg" src="<spring:url value="/images/save.png"/> "/></form:button>
                                                                 </c:if>
                                                                 <c:if test="${!cartSaved}">

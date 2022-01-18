@@ -33,14 +33,15 @@ public class ProductController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/all")
-    public String shop(Model model, @ModelAttribute(value = Constants.CURRENT_PAGE)CurrPage page, @ModelAttribute(value = Constants.CURRENT_CART) Cart cart){
+    public String shop(Model model, @ModelAttribute(value = Constants.CURRENT_PAGE)CurrPage page, @ModelAttribute(value = Constants.CURRENT_CART) Cart cart, Locale locale){
         model.addAttribute("categId", 0);
         model.addAttribute(Constants.CURRENT_CART, cart);
         model.addAttribute("cartItem", new CartItem());
         page.setPageID(1);
         model.addAttribute("title", "Products");
         model.addAttribute("products", productDataAccess.getProducts());
-        model.addAttribute("pageName", "Shop");
+        String pageName = locale.getLanguage().equals("en") ? "Shop" : "Boutique";
+        model.addAttribute("pageName", pageName);
         return "temp:products";
     }
 
